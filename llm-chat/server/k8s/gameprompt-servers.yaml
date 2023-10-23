@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: gameprompt
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gameprompt-deployment
+  labels:
+    app: gameprompt
+  namespace: gameprompt
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gameprompt
+  template:
+    metadata:
+      labels:
+        app: gameprompt
+      annotations:
+        gke-gcsfuse/volumes: "true"
+    spec:
+      nodeSelector:
+        cloud.google.com/compute-class: "Balanced"
+        supported-cpu-platform.cloud.google.com/Intel_Ice_Lake: "true"
+      securityContext:
+        runAsUser: 1001
+        runAsGroup: 2002
+        fsGroup: 3003
+      containers:
+      - image: "us-docker.pkg.dev/gss-arena/gameprompt/gameprompt-server@sha256:920f846480a76f0d1b1dc4d1961d94d06779a68e2b85427852567211b321f0f0"
+        name: gameprompt-server
+        command:
+        - "/gameprompt-server-linux-amd64-static-upx"
+        args:
+        - "-threads=8"
+        # - "-mock=true"
+        # - "-warmup=false"
+        resources:
+          requests:
+            cpu: "8"
+            memory: "8Gi"
+          limits:
+            cpu: "9"
+            memory: "10Gi"
+        env:
+        - name: GAMEPROMPT_LLAMA_PATH
+          value: "/llama-linux-amd64-static-upx"
+        - name: GAMEPROMPT_MODEL_PATH
+          value: "/llm/vicuna-7b-v1.5.Q4_K_M.gguf"
+        - name: GAMEPROMPT_VMTOUCH_PATH
+          value: "/vmtouch-linux-amd64-static-upx"
+        - name: "GAMEPROMPT_REDIS_HOST"
+          value: "10.99.10.163"
+        - name: "GAMEPROMPT_PROJECT"
+          value: "gss-arena"
+        - name: "GAMEPROMPT_DATASET"
+          value: "gameprompt_metrics"
+        - name: "GAMEPROMPT_TABLE"
+          value: "lotr_metrics"
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.uid
+        readinessProbe:
+          grpc:
+            port: 50005
+          initialDelaySeconds: 5
+          periodSeconds: 1
+        livenessProbe:
+          grpc:
+            port: 50005
+          initialDelaySeconds: 15
+          periodSeconds: 360
+        ports:
+        - containerPort: 50005
+        volumeMounts:
+        - name: llm-gcs
+          mountPath: /llm
+          readOnly: true
+      serviceAccountName: gameprompt-worker
+      volumes:
+      - name: llm-gcs
+        csi:
+          driver: gcsfuse.csi.storage.gke.io
+          readOnly: true
+          volumeAttributes:
+            bucketName: gss-arena-llm-storage
+            mountOptions: "implicit-dirs,uid=1001,gid=3003"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gameprompt-svc-lb
+  namespace: gameprompt
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app: gameprompt
+  ports:
+  - name: tcp-port
+    protocol: TCP
+    port: 50005
+    targetPort: 50005

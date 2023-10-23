@@ -1,0 +1,14 @@
+15895:C 16 Oct 2023 14:12:04.240 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+15895:C 16 Oct 2023 14:12:04.240 * Redis version=7.2.1, bits=64, commit=00000000, modified=0, pid=15895, just started
+15895:C 16 Oct 2023 14:12:04.241 # Warning: no config file specified, using the default config. In order to specify a config file use redis-server /path/to/redis.conf
+15895:M 16 Oct 2023 14:12:04.241 * Increased maximum number of open files to 10032 (it was originally set to 256).
+15895:M 16 Oct 2023 14:12:04.241 * monotonic clock: POSIX clock_gettime
+15895:M 16 Oct 2023 14:12:04.241 * Running mode=standalone, port=6379.
+15895:M 16 Oct 2023 14:12:04.241 # WARNING: The TCP backlog setting of 511 cannot be enforced because kern.ipc.somaxconn is set to the lower value of 128.
+15895:M 16 Oct 2023 14:12:04.242 * Server initialized
+15895:M 16 Oct 2023 14:12:04.242 * Ready to accept connections tcp
+15895:signal-handler (1697479929) Received SIGTERM scheduling shutdown...
+15895:M 16 Oct 2023 14:12:09.209 * User requested shutdown...
+15895:M 16 Oct 2023 14:12:09.209 * Saving the final RDB snapshot before exiting.
+15895:M 16 Oct 2023 14:12:09.214 * DB saved on disk
+15895:M 16 Oct 2023 14:12:09.214 # Redis is now ready to exit, bye bye...

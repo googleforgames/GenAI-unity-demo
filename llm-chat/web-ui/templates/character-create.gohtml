@@ -1,0 +1,28 @@
+{{define "title"}}New Character | GamePrompt Character{{end}}
+{{define "main"}}
+    <form id="CharacterCreate" action="/character" method="POST">
+      <div class="character">
+        <h2><span class="material-symbols-outlined">smart_toy</span> <input type="text" name="Name" placeholder="Name" ></h2>
+        <input type="text" name="Version" class="character-version" placeholder="1.0">
+
+        <h3>Prompt Prefix</h3>
+        <textarea name="PromptPrefix" placeholder="Imagine that you are an interesting character..."></textarea>
+        
+        <h3>Prompt Suffix</h3>
+        <textarea name="PromptSuffix" placeholder="### Character's response:"></textarea>
+        
+        <h3>Loading Phrases</h3>
+        <p>One phrase per line:</p>
+        <textarea name="LoadingPhrases" placeholder="Fascinating that you should ask me that!"></textarea>
+        
+        <h3>Busy Phrases</h3>
+        <p>One phrase per line:</p>
+        <textarea name="BusyPhrases" placeholder="I am too busy to answer your question right now."></textarea>
+        <div class="controls">
+          <ul>
+            <li class="save"><button><span class="material-symbols-outlined">save</span>Create</button></li>
+          </ul>
+        </div>
+      </div>
+    </form>
+{{end}}

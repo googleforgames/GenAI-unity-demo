@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>GamePrompt</title>
+  <link rel="stylesheet" type="text/css" href="gameprompt.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <meta name="author" content="Sebastian Weigand">
+  <meta name="copyright" content="2023, Google">
+</head>
+
+<body>
+  <header>
+    <h1><a href="/">GamePrompt</a></h1>
+    <nav>
+      <ul>
+        <li><span class="material-symbols-outlined">home</span> Home</li>
+        <li><span class="material-symbols-outlined">person_add</span> Character Creator</li>
+        <li><span class="material-symbols-outlined">monitoring</span> Operations Center</li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div class="character">
+      <div class="controls">
+        <ul>
+          <li class="edit"><a href="#"><span class="material-symbols-outlined">edit</span> Edit Gandalf</a></li>
+          <li class="delete"><a href="#"><span class="material-symbols-outlined">delete</span> Delete Gandalf</a></li>
+        </ul>
+      </div>
+      <h2><span class="material-symbols-outlined">smart_toy</span> Gandalf</h2>
+      <h3>Prompt Prefix</h3>
+      <p class="prompt">"Pretend you are Gandalf the wizard, from the book Lord of the Rings. Answer the following
+        question in-character, as Gandalf would. Keep your answer very short and concise, at most 3 sentences.\n ###
+        Question:"</p>
+      <h3>Prompt Suffix</h3>
+      <p class="prompt">"### Gandalf's Answer:"</p>
+      <h3>Loading Phrases</h3>
+      <ol>
+        <li>"Hmm. That's a particularly interesting question."</li>
+        <li>"Fascinating that you should ask me that."</li>
+        <li>"Great question! I haven't been asked that in ages."</li>
+      </ol>
+      <h3>Busy Phrases</h3>
+      <ol>
+        <li>"I am terribly sorry, but I simply do not have the time to answer your question at the moment."</li>
+        <li>"I am terribly sorry, I know you've come from a long way to ask me that, but I am too busy right now."</li>
+      </ol>
+    </div>
+    <div class="character">
+      <div class="controls">
+        <ul>
+          <li class="edit"><a href="#"><span class="material-symbols-outlined">edit</span> Edit Legolas</a></li>
+          <li class="delete"><a href="#"><span class="material-symbols-outlined">delete</span> Delete Legolas</a></li>
+        </ul>
+      </div>
+      <h2><span class="material-symbols-outlined">smart_toy</span> Legolas</h2>
+      <h3>Prompt Prefix</h3>
+      <p class="prompt">"Pretend you are Legolas, from the Lord of the Rings. Answer the following question
+        in-character, as Legolas would. Keep your answer very short and concise, at most 3 sentences.\n ### Question:"
+      </p>
+      <h3>Prompt Suffix</h3>
+      <p class="prompt">"### Legolas's Answer:"</p>
+      <h3>Loading Phrases</h3>
+      <ol>
+        <li>"Mine eyes are sharp for an Elf, yet I do not recall having been asked this question before."</li>
+      </ol>
+      <h3>Busy Phrases</h3>
+      <ol>
+        <li>"I fear I am far too busy to assist you."</li>
+      </ol>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2023 Google, LLC</p>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{{define "title"}}GamePrompt Characters{{end}}
+{{define "main"}}
+{{if eq (len .) 0}}
+Nothing to see here.
+{{end}}
+{{range $name, $character := .}}
+    <div class="character-card">
+      <h2><a href="/character/{{$name}}"><span class="material-symbols-outlined">smart_toy</span> {{$name}}</a></h2>
+      <p class="card-info">v{{$character.Version}}</p>
+    </div>
+{{end}}
+{{end}}
