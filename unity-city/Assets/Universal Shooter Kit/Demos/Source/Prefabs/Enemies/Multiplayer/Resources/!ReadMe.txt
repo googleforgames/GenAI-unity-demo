@@ -1,0 +1,1 @@
+﻿Please note - the prefabs below are made to demonstrate the multiplayer mode, and they are missing some scripts. This is not a bug or project issue and these scripts will automatically appear after you import PUN 2.

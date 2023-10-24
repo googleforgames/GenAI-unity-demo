@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DBK_Concrete_Rubble_A
+  m_Shader: {fileID: 4800000, guid: b83fe8e77ea6a254db3da190eaaaeb04, type: 3}
+  m_ShaderKeywords: _NORMALMAP
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: 5f34cf4c7404a0c44b51bf8e72241005, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorMap:
+        m_Texture: {fileID: 2800000, guid: 89f871b5c2ed6704e9b783d5c11d09a8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteZbrush_matid:
+        m_Texture: {fileID: 2800000, guid: a4d1907e6c934ff44a8ec3e9235f0ea9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteZbrush_normal:
+        m_Texture: {fileID: 2800000, guid: e7e06dc793e3ae7449663a387c4f4933, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteZbrush_normal1:
+        m_Texture: {fileID: 2800000, guid: 02045fcd06eb2d74397ad0dcb7450563, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteZbrush_normal2:
+        m_Texture: {fileID: 2800000, guid: 02045fcd06eb2d74397ad0dcb7450563, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteZbrush_Mask_A:
+        m_Texture: {fileID: 2800000, guid: 1787681c2c1799842ba3c182bb57a76f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DBK_Concrete_NM:
+        m_Texture: {fileID: 2800000, guid: 5151c7b9c95404c4c9c83ccd6634c674, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DBK_Concrete_Rubble_A_Color:
+        m_Texture: {fileID: 2800000, guid: 89f871b5c2ed6704e9b783d5c11d09a8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DamageNM:
+        m_Texture: {fileID: 2800000, guid: 4ea5083d09e1aa747b5ad9a32ad2cb74, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNM:
+        m_Texture: {fileID: 2800000, guid: e2f2024fc17d02a4cae64316bfc62502, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirtRubble_:
+        m_Texture: {fileID: 2800000, guid: e48b7177e763aa246b8ade64905f94d4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EdgeRubble_:
+        m_Texture: {fileID: 2800000, guid: d55da8ce31d57d24c9055566835031ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainNM:
+        m_Texture: {fileID: 2800000, guid: e7e06dc793e3ae7449663a387c4f4933, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 3f36e0caf78aeca4f81e435486cde529, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex1:
+        m_Texture: {fileID: 2800000, guid: bf84d265e341525459ab1fd8a003c547, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskA:
+        m_Texture: {fileID: 2800000, guid: fb4470513e42fce4988b8a33454a2d23, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskB:
+        m_Texture: {fileID: 2800000, guid: 5b71a3cf759201643b7d66aa9084dbd4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: 86f744b750928074b84b8bdf04bbaaf9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _23: 1
+    - _AODirt: 0.21943645
+    - _BrightnessAdd: 0.030428972
+    - _BumpScale: 1
+    - _Color: 0
+    - _Color2: 0
+    - _ColorTile: 4.17647
+    - _ConcreteBareRange: 0.9801808
+    - _ConcreteBareRange1: 0.65
+    - _ConcreteBareSmooth: 0.055235285
+    - _ConcreteBareSmooth1: 0.267
+    - _ConcreteBrightness: 0.066702306
+    - _CustomColor: 0
+    - _Cutoff: 0.5
+    - _DamageNMTiling: 8
+    - _DamageScale: 0.7267291
+    - _DetailNMTiling: 6
+    - _DetailNormalMapScale: 1
+    - _DetailScale: 2.6058824
+    - _DirtContrast: 0.92941177
+    - _DirtContrast1: 1.1774755
+    - _DirtInsideMultiplier: 0.16221854
+    - _DirtRange: 0.6583209
+    - _DirtRange1: 0.5948824
+    - _DirtSmooth: 0.7691464
+    - _DirtSmooth1: 0.6242941
+    - _DirtSmoothness: 1.0769445
+    - _DirtSmoothness1: 1.0769445
+    - _DstBlend: 0
+    - _EdgesAdd: 0.043460622
+    - _Float0: 0.69411767
+    - _Float1: 1
+    - _Float2: 0.07687109
+    - _Float3: 2
+    - _Float4: 2.9886434
+    - _Float5: 0.39747527
+    - _GlossMapScale: 1
+    - _Glossiness: 0.235
+    - _GlossyReflections: 1
+    - _MainSmoothness: 0.22412397
+    - _MainSmoothness1: 0.22412397
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _PaintEdgesMultiply1: 0.24432394
+    - _PaintRange: 0.64755
+    - _PaintSmooth: 0.06668227
+    - _PaintSmoothness: 0.1882353
+    - _Parallax: 0.02
+    - _Scale: 0.81580454
+    - _ScaleFlat: 1.9530317
+    - _Smoothenss: 0.10729837
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _TilingDetails: 7.9502583
+    - _TilingFlat: 6
+    - _UVSec: 0
+    - _UseCustomColor: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _Color: {r: 0.23, g: 0.23, b: 0.23, a: 1}
+    - _Color0: {r: 0.343, g: 0.29366437, b: 0.2184863, a: 0}
+    - _Color1: {r: 0.364, g: 0.322, b: 0.28, a: 0}
+    - _Dirt: {r: 0.14699996, g: 0.11645303, b: 0.08320198, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Paint: {r: 0.25882345, g: 0.27058813, b: 0.3137254, a: 1}

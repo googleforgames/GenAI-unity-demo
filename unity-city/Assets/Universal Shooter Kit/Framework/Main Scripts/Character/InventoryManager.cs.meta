@@ -1,0 +1,25 @@
+fileFormatVersion: 2
+guid: 6cd601f43f2b5f3489e4cdd89ea95fc8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - currentWeapon: {instanceID: 0}
+  - FistIcon: {fileID: 2800000, guid: 47a6d67e19b464c61823a2d53e8ab082, type: 3}
+  - lineRenderer: {instanceID: 0}
+  - bloodProjector: {instanceID: 0}
+  - HandsIdle: {instanceID: 0}
+  - HandsWalk: {instanceID: 0}
+  - HandsRun: {instanceID: 0}
+  - fistAttackAudio: {instanceID: 0}
+  - LeftHandCollider: {instanceID: 0}
+  - RightHandCollider: {instanceID: 0}
+  - trailMaterial: {instanceID: 0}
+  - ScopeScreenTexture: {instanceID: 0}
+  - Controller: {instanceID: 0}
+  - WeaponController: {instanceID: 0}
+  executionOrder: 0
+  icon: {fileID: 2800000, guid: 115fc1933dd6f4d3e973b38637a7ae35, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
