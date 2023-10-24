@@ -1,0 +1,429 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: DBK_Concrete
+  m_Shader: {fileID: 4800000, guid: 1fb4d32a4b8c39d4cbbc428e5c3b3224, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Bricks:
+        m_Texture: {fileID: 2800000, guid: a48470f8f4e952a4896e7f8e683308cb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BricksNM:
+        m_Texture: {fileID: 2800000, guid: 96106b54b9fd0a84c8048ce5aefd0a43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CinderblockBricksColor:
+        m_Texture: {fileID: 2800000, guid: 212dbaef8a2491945b40e414b104e9b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CinderblockHeightmap:
+        m_Texture: {fileID: 2800000, guid: 6d9f77cfe1320914c8c5d9542be34eec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorTheme:
+        m_Texture: {fileID: 2800000, guid: 674cca30d60d52842b402f8e05c69623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorsSelection:
+        m_Texture: {fileID: 2800000, guid: 674cca30d60d52842b402f8e05c69623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ColorsSelection1:
+        m_Texture: {fileID: 2800000, guid: 674cca30d60d52842b402f8e05c69623, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteDamage:
+        m_Texture: {fileID: 2800000, guid: 96106b54b9fd0a84c8048ce5aefd0a43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConceteDamageNM:
+        m_Texture: {fileID: 2800000, guid: 96106b54b9fd0a84c8048ce5aefd0a43, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteBase:
+        m_Texture: {fileID: 2800000, guid: 7b4c1adf45262794a8a1e87afc29e58f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteBase_Mixed_AO:
+        m_Texture: {fileID: 2800000, guid: b2534542f060e4046b90c050b900ea42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteClean:
+        m_Texture: {fileID: 2800000, guid: c4dfc787f41021341b4f554329370277, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteCleanNM:
+        m_Texture: {fileID: 2800000, guid: c4dfc787f41021341b4f554329370277, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteDamageTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteHeightRGBA:
+        m_Texture: {fileID: 2800000, guid: 6d9f77cfe1320914c8c5d9542be34eec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteNM:
+        m_Texture: {fileID: 2800000, guid: e2f2024fc17d02a4cae64316bfc62502, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteTransition:
+        m_Texture: {fileID: 2800000, guid: 6f7776ae4cee0264eae09b1fe8e995d7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ConcreteTransitionNM:
+        m_Texture: {fileID: 2800000, guid: 6f7776ae4cee0264eae09b1fe8e995d7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Concrete_01:
+        m_Texture: {fileID: 2800000, guid: 78c21b9113589ad45b319bf2aff62708, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DamageColor:
+        m_Texture: {fileID: 2800000, guid: 3920578cb267cd947bed7ce40996407b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DamageNM:
+        m_Texture: {fileID: 2800000, guid: 381eef27937e5464e93f48a9a73d286d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Dirt:
+        m_Texture: {fileID: 2800000, guid: d5b3d8746147e2941aa3afcda5b4ad59, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirtMasks:
+        m_Texture: {fileID: 2800000, guid: 854da58ad22c19b44acf3bad96e37b40, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DirtMasksRGBA:
+        m_Texture: {fileID: 2800000, guid: a862e7bbf7a1dc24eaeb830064bb3bd7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Heigh:
+        m_Texture: {fileID: 2800000, guid: 33f4ce6210409e74ba537615da1c3916, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: bf84d265e341525459ab1fd8a003c547, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalDamaged:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalGood:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterDirtMasksRGBA:
+        m_Texture: {fileID: 2800000, guid: 854da58ad22c19b44acf3bad96e37b40, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterDirtTexture:
+        m_Texture: {fileID: 2800000, guid: d30db409769629045978df6c52e5e463, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterGoodNM:
+        m_Texture: {fileID: 2800000, guid: c4dfc787f41021341b4f554329370277, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterGood_height:
+        m_Texture: {fileID: 2800000, guid: 0b090f502dbaccf43979a7c679f2968b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterGood_height1:
+        m_Texture: {fileID: 2800000, guid: 0b090f502dbaccf43979a7c679f2968b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlasterTransitionNM:
+        m_Texture: {fileID: 2800000, guid: 6f7776ae4cee0264eae09b1fe8e995d7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RGBAHeightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RGBAMaskA:
+        m_Texture: {fileID: 2800000, guid: f6bcb3be2ffc7eb439937251e6b1e988, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RGBAMaskB:
+        m_Texture: {fileID: 2800000, guid: 0cc5a2d9845f1c243a311cd5fe2d190e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RGBAMaskC:
+        m_Texture: {fileID: 2800000, guid: 78c21b9113589ad45b319bf2aff62708, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_OldBricks_A:
+        m_Texture: {fileID: 2800000, guid: a8398228ba53cb540bb8ee9e5cc69aca, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_OldBricks_N:
+        m_Texture: {fileID: 2800000, guid: dd8d0475e122575458ccd4c0a449963c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _T_TilingNoise01_N:
+        m_Texture: {fileID: 2800000, guid: 95af8f315f6b6fc42803d089874ea127, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture0:
+        m_Texture: {fileID: 2800000, guid: 455260ed35a7f4f46ae465f755108ffb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: d4a4474ca9b9992439c0760650c13bed, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample1:
+        m_Texture: {fileID: 2800000, guid: 6d9f77cfe1320914c8c5d9542be34eec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample10:
+        m_Texture: {fileID: 2800000, guid: d5b3d8746147e2941aa3afcda5b4ad59, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample2:
+        m_Texture: {fileID: 2800000, guid: b2534542f060e4046b90c050b900ea42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample3:
+        m_Texture: {fileID: 2800000, guid: 6a4a9d8faf7aa304480d6ce95d35951c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample4:
+        m_Texture: {fileID: 2800000, guid: 0b090f502dbaccf43979a7c679f2968b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample8:
+        m_Texture: {fileID: 2800000, guid: cf1a045bb42bc464a9bad3dc74f0e92d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample9:
+        m_Texture: {fileID: 2800000, guid: cf1a045bb42bc464a9bad3dc74f0e92d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TransitionNM:
+        m_Texture: {fileID: 2800000, guid: 4ea5083d09e1aa747b5ad9a32ad2cb74, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord3:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _AO: 3.07
+    - _Albedo: 0
+    - _BareBrightness: 0.98823535
+    - _BareConcreteRange: 0.66243684
+    - _BareConcreteSmooth: 0.34628615
+    - _BareSmoothness: 0.64473736
+    - _BaseColor: 0.4357953
+    - _BlendPower: 0.299
+    - _BricksSmoothness: 0.5034706
+    - _BumpScale: 1
+    - _CavityEdgesStrenght: 0.6596708
+    - _Color: 2
+    - _ColorTheme1: 1.1163812
+    - _ColorTheme2: 0
+    - _ColorThemeSel: 0
+    - _ConcreteBareRange: 0.65
+    - _ConcreteBareSmooth: 0.267
+    - _ConcreteBareSmoothness: 0.64473736
+    - _ConcreteDamageScale: 1.2973446
+    - _ConcreteDamageTiling: 2
+    - _ConcreteDmgSmoothness: 0.5034706
+    - _ConcreteEdges: 0
+    - _ConcreteMultiply: 0.4627991
+    - _ConcreteTile: 2
+    - _ConcreteTransitionAmount: 0.007670588
+    - _Contrast: 0
+    - _CracksTiling: 0
+    - _CustomColor: 38
+    - _Cutoff: 0.5
+    - _DamageAmount: 0.91764706
+    - _DamageAmount1: 1
+    - _DamageAmountInside: 0.88
+    - _DamageAmountSmooth: 14.4
+    - _DamageAmountTiling: 4.141967
+    - _DamageBrightness: 1.9594152
+    - _DamageBrigthness: 3.01
+    - _DamageMultiplier: 0.7882353
+    - _DamageMultiplier1: 0.6878818
+    - _DamageScale: 1.1935546
+    - _DamageSize: 0
+    - _DamageSmoothness: 0.515
+    - _DamageSmoothness1: 75.3
+    - _DamageSmoothnessIn: 100
+    - _DamageSmoothnessInside: 72.7
+    - _DamageTiling: 2
+    - _DamagedConcreteBrigthness: 2.5767925
+    - _DamagedEdgesBrightness: 2.319149
+    - _DetailNormalMapScale: 1
+    - _DiffuseExp: 1
+    - _DirtAmount: 0
+    - _DirtBlend1: 0
+    - _DirtBlend2: 0
+    - _DirtBrightness: 0
+    - _DirtBrightness1: 0.547
+    - _DirtContrast: 1.0362995
+    - _DirtMultiply: 0
+    - _DirtMultiply1: 0.295627
+    - _DirtOverlay: 0.358
+    - _DirtPlasterPower: 0.438
+    - _DirtRange: 0.59488237
+    - _DirtRo: 0.90294117
+    - _DirtRoughness: 0
+    - _DirtSmooth: 0.6242941
+    - _DirtSmoothness: 1.0712789
+    - _DirtSmoothness1: 7.1480064
+    - _DirtStrenght: 0.38071212
+    - _DmgConcreteBrigthness: 3.01
+    - _DstBlend: 0
+    - _Edges: 0.47388238
+    - _EdgesOverlay: 0.408
+    - _EdgesStrenght: 0.6596708
+    - _Exp: 33.8
+    - _ExtraDamage: 0
+    - _Float0: 1
+    - _Float1: 1.9411764
+    - _Float3: 0
+    - _Float4: 1.3918016
+    - _Float5: 0.602415
+    - _Fuzzines: 6.78
+    - _Fuzzinies: 0.58306813
+    - _Fuzzinies1: 0
+    - _FuzziniesConcrete: 0
+    - _GlossMapScale: 1
+    - _Glossiness: 0.5
+    - _GlossyReflections: 1
+    - _Height: 1
+    - _Inside: 0.046
+    - _InsideAmount: 0
+    - _InsideColor: 0
+    - _InsideContrast: 100
+    - _InsidePower: 4.37
+    - _InsideSmoothness: 0
+    - _Int0: 0
+    - _Keyword1: 0
+    - _MainSmoothness: 0.426
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Offset: 1
+    - _OutsideColor: 0
+    - _OverlayDirtStrenght: 0.42682976
+    - _PaintAmount: 0.5298843
+    - _PaintDetails: 0
+    - _PaintEdgesMultiply: 0.4832942
+    - _PaintOpacity: 0
+    - _PaintSmoothness: 0.582
+    - _Parallax: 0.02
+    - _Plaster: 0.41792566
+    - _PlasterAddExp: 0.657
+    - _PlasterMultiplyDirt: 1.49
+    - _PlasterTransitionContrast: 0
+    - _Power: 0.007670588
+    - _Power1: 0.10475929
+    - _PowerInside: 0.19412155
+    - _Range: 0.444
+    - _RangeConcrete: 0.54478973
+    - _RangeFuzziness: 0.55248165
+    - _Rangeer: 0.70424515
+    - _Rangeer1: 0.6
+    - _RoughnessConcrete: 0.5
+    - _RoughnessPaint: 0.5
+    - _Scale: 0.90588236
+    - _SkinColor: 1
+    - _Smoothnes: 0.3596622
+    - _SmoothnessIn: 100
+    - _SmoothnessTextureChannel: 0
+    - _SpecularHighlights: 1
+    - _SrcBlend: 1
+    - _Step: 0.1
+    - _Strenght: 4.3
+    - _Substract: 1.88
+    - _Tiling: 5
+    - _TransitionAmount: 0.0020354865
+    - _TransitionBrightness: 1.4470589
+    - _TransitionContrast: 4.923943
+    - _TransitionExp: 0.7522764
+    - _TransitionScale: 2
+    - _UVSec: 0
+    - _UseCustomColor: 0
+    - _ZWrite: 1
+    - __dirty: 0
+    m_Colors:
+    - _CementColor: {r: 0.42745003, g: 0.4078422, b: 0.3843128, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color0: {r: 0.706, g: 0.61657333, b: 0.49890664, a: 1}
+    - _Color1: {r: 0.8745098, g: 0.87068385, b: 0.8561451, a: 0}
+    - _ConcreteBare: {r: 0.874, g: 0.8665618, b: 0.82565105, a: 0}
+    - _ConcreteColor: {r: 0.58699995, g: 0.3779172, b: 0.22188565, a: 1}
+    - _DirtColor: {r: 0.545, g: 0.50132966, b: 0.43218502, a: 0}
+    - _DirtColor1: {r: 0.86, g: 0.797191, b: 0.7392135, a: 0}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _PaintColor: {r: 0.2738686, g: 0.416574, b: 0.4689999, a: 1}
+    - _PlasterColor: {r: 0.58699995, g: 0.37791732, b: 0.22188577, a: 1}
+    - _PlasterDirt: {r: 0.33092108, g: 0.45887724, b: 0.503, a: 1}
+    - _Vector0: {r: 0, g: 0, b: 0, a: 0}

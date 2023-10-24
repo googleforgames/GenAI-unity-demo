@@ -1,0 +1,384 @@
+fileFormatVersion: 2
+guid: 7ccb70af95a974fb9beb1a79007ebbf6
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Barrel_1
+    100002: Barrel_1 1
+    100004: Barrel_base_1
+    100006: Barrel_base_1 1
+    100008: Barrel_end
+    100010: Barrel_end 1
+    100012: BulletSpawnPoint
+    100014: BulletSpawnPoint (1)
+    100016: Cockpit_Heavy
+    100018: End_Heel_L
+    100020: End_Heel_R
+    100022: End_Toe_L
+    100024: End_Toe_R
+    100026: Flak
+    100028: Flak 1
+    100030: Foot_L
+    100032: Foot_R
+    100034: Geom_barrel
+    100036: Geom_barrel 1
+    100038: Geom_barrel_base
+    100040: Geom_barrel_base 1
+    100042: Geom_body
+    100044: Geom_body 1
+    100046: Geom_Cockpit_heavy
+    100048: Geom_legs_heavy_lvl1
+    100050: Geom_Shoulders_heavy_lvl1
+    100052: Heel_L
+    100054: Heel_R
+    100056: Hip_L
+    100058: Hip_R
+    100060: HIPS
+    100062: Mount_backpack
+    100064: Mount_backpack 1
+    100066: Mount_cockpit
+    100068: Mount_Rockets_shoulder_L
+    100070: Mount_Rockets_shoulder_R
+    100072: Mount_top
+    100074: Mount_Weapon_L
+    100076: Mount_Weapon_L 1
+    100078: Mount_Weapon_R
+    100080: Mount_Weapon_R 1
+    100082: Mount_Weapon_top
+    100084: Pelvis
+    100086: Shin_L
+    100088: Shin_R
+    100090: Shoulders_Heavy_lvl1
+    100092: Toe_L
+    100094: Toe_R
+    100096: Top
+    100098: //RootNode
+    100100: Weapon_Flak_1x_Lvl4
+    100102: Weapon_Flak_1x_Lvl5
+    400000: Barrel_1
+    400002: Barrel_1 1
+    400004: Barrel_base_1
+    400006: Barrel_base_1 1
+    400008: Barrel_end
+    400010: Barrel_end 1
+    400012: BulletSpawnPoint
+    400014: BulletSpawnPoint (1)
+    400016: Cockpit_Heavy
+    400018: End_Heel_L
+    400020: End_Heel_R
+    400022: End_Toe_L
+    400024: End_Toe_R
+    400026: Flak
+    400028: Flak 1
+    400030: Foot_L
+    400032: Foot_R
+    400034: Geom_barrel
+    400036: Geom_barrel 1
+    400038: Geom_barrel_base
+    400040: Geom_barrel_base 1
+    400042: Geom_body
+    400044: Geom_body 1
+    400046: Geom_Cockpit_heavy
+    400048: Geom_legs_heavy_lvl1
+    400050: Geom_Shoulders_heavy_lvl1
+    400052: Heel_L
+    400054: Heel_R
+    400056: Hip_L
+    400058: Hip_R
+    400060: HIPS
+    400062: Mount_backpack
+    400064: Mount_backpack 1
+    400066: Mount_cockpit
+    400068: Mount_Rockets_shoulder_L
+    400070: Mount_Rockets_shoulder_R
+    400072: Mount_top
+    400074: Mount_Weapon_L
+    400076: Mount_Weapon_L 1
+    400078: Mount_Weapon_R
+    400080: Mount_Weapon_R 1
+    400082: Mount_Weapon_top
+    400084: Pelvis
+    400086: Shin_L
+    400088: Shin_R
+    400090: Shoulders_Heavy_lvl1
+    400092: Toe_L
+    400094: Toe_R
+    400096: Top
+    400098: //RootNode
+    400100: Weapon_Flak_1x_Lvl4
+    400102: Weapon_Flak_1x_Lvl5
+    7400000: Walk
+    7400002: Run
+    7400004: Idle
+    7400006: Find
+    7400008: Turn
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Walk Animation
+      firstFrame: 0
+      lastFrame: 121
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.061844002
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.51235956
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Run
+      takeName: Run Animation
+      firstFrame: 0
+      lastFrame: 105
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.013483146
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.48539326
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Idle
+      takeName: Idle
+      firstFrame: 0
+      lastFrame: 482
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.26067418
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0.5
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Find
+      takeName: Find
+      firstFrame: 0
+      lastFrame: 721
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Turn
+      takeName: Turn
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.45393258
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.9707865
+        functionName: PlayStepSound
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 1
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: Pelvis
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
