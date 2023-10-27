@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SpaceShip : MonoBehaviour
 {
@@ -36,12 +31,6 @@ public class SpaceShip : MonoBehaviour
 
     private void PlayRepairedAnimation()
     {
-        // TODO implement the flying away animation
         _animator.SetTrigger(FlyAway);
-        
-        var transform = gameObject.transform;
-        transform.rotation = Quaternion.identity;
-        var position = transform.position;
-        transform.Translate(new Vector3(position.x + 2, position.y, position.z));
     }
 }
