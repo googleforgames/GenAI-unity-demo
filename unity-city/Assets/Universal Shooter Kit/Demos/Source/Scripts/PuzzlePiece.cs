@@ -1,10 +1,10 @@
 using System;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PuzzlePiece : MonoBehaviour
 {
-    [SerializeField] private Text _uiHint;
+    [SerializeField] private TextMeshProUGUI _uiHint;
     private Action _piecePicked;
     private bool _isShown = false;
 
