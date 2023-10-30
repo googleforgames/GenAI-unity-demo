@@ -49,9 +49,6 @@ namespace GercStudio.USK.Scripts
 
         public GameObject secondCharacter;
         public GameObject secondCharGO;
-        
-        [SerializeField] private PuzzlePiece[] _puzzlePieces;
-        private int _piecesCollected = 0;
 
         void Awake()
         {
@@ -189,8 +186,6 @@ namespace GercStudio.USK.Scripts
             }
             
             CurrentCharacter = 0;
-
-            SubscribePuzzlePiecePickups();
         }
 
         public void SwitchCharacter()
@@ -501,27 +496,6 @@ namespace GercStudio.USK.Scripts
             yield return new WaitForSeconds(1);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StopCoroutine("FastRestart");
-        }
-
-        private void SubscribePuzzlePiecePickups()
-        {
-            if (!_puzzlePieces.Any())
-            {
-                return;
-            }
-
-            foreach (var puzzlePiece in _puzzlePieces)
-            {
-                puzzlePiece.SubscribePickedAction(OnPuzzlePieceCollected);
-            }
-        }
-
-        private void OnPuzzlePieceCollected()
-        {
-            if (++_piecesCollected == _puzzlePieces.Length)
-            {
-                // do something
-            }
         }
 
     }
