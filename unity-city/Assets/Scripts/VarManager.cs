@@ -36,15 +36,35 @@ public class VarManager : MonoBehaviour
         spriteRenderer.sortingOrder = -1;
         */
 
-        GameObject gameObjectToApplySprite2 = GameObject.Find("BillboardSprite2");
+        //TODO: Rename variables for readability
+        GameObject gameObjectToApplySprite2 = GameObject.Find("BillboardSpriteBurger");
         SpriteRenderer spriteRenderer2 = gameObjectToApplySprite2.GetComponent<SpriteRenderer>();
         spriteRenderer2.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
         spriteRenderer2.sortingOrder = -1;
+        
+        GameObject gameObjectToApplySprite3 = GameObject.Find("BillboardSpriteGate");
+        SpriteRenderer spriteRenderer3 = gameObjectToApplySprite3.GetComponent<SpriteRenderer>();
+        spriteRenderer3.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        spriteRenderer3.sortingOrder = -1;
+        
+        GameObject gameObjectToApplySprite4 = GameObject.Find("BillboardSpriteBus");
+        SpriteRenderer spriteRenderer4 = gameObjectToApplySprite4.GetComponent<SpriteRenderer>();
+        spriteRenderer4.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        spriteRenderer4.sortingOrder = -1;
+        
+        GameObject gameObjectToApplySprite5 = GameObject.Find("BillboardSpriteShip");
+        SpriteRenderer spriteRenderer5= gameObjectToApplySprite5.GetComponent<SpriteRenderer>();
+        spriteRenderer5.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        spriteRenderer5.sortingOrder = -1;
+       
 
-        generateImage("BillboardSprite", "scifi image of black 3d cube with bright teal borders", 200);
+        generateImage("BillboardSpriteCube", "scifi image of black 3d cube with bright teal borders", 200);
         generateImage("WallDisplay1Sprite", "fantasy art,alien pointing at a hamburger", 2000);
         generateImage("WallDisplay2Sprite", "scifi image of an alien sitting on top of a jeep within a city", 4000);
-        generateImage("BillboardSprite2", "scifi image of a hamburger and an open now sign in the background", 12000);
+        generateImage("BillboardSpriteBurger", "scifi image of a hamburger and an open now sign in the background", 12000);
+        generateImage("BillboardSpriteGate", "scifi image of a small candle flame behind a closed fence", 12000);
+        generateImage("BillboardSpriteBus", "scifi image of an alien riding a school bus", 12000);
+        generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off", 22000);
     }
 
     // Update is called once per frame
