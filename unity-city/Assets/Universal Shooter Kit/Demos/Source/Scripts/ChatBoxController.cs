@@ -60,7 +60,10 @@ public class ChatBoxController : MonoBehaviour
 
     private void ShowNextAnswer()
     {
-        _lastNPCReplicLabel.text = DummyDialogue.AnswerList[_nextAnswerIndex++];
+        if (_nextAnswerIndex < DummyDialogue.AnswerList.Count)
+        {
+            _lastNPCReplicLabel.text = DummyDialogue.AnswerList[_nextAnswerIndex++];
+        }
     }
 
     private void OnCloseButtonPressed()
