@@ -1,36 +1,45 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Conversation : MonoBehaviour
+public class Conversation : MonoBehaviour, IInteractable
 {
-    [SerializeField] private TextAsset _dummyDialogueJSON;
+    [SerializeField] private ChatBoxController _chatBoxController;
+    [SerializeField] private List<string> _dummyDialogue;
 
     private InteractableObject _interactableObject;
-    private string _dialogue;
-
-    private void Awake()
-    {
-        _interactableObject = GetComponent<InteractableObject>();
-    }
+    private bool _isChatBoxShown = false;
 
     private void Start()
     {
-        if (_dummyDialogueJSON)
-        {
-            _dialogue = JsonUtility.FromJson<string>(_dummyDialogueJSON.text);
-        }
-
+        _interactableObject = GetComponent<InteractableObject>();
         if (_interactableObject)
         {
-            _interactableObject.SubscribeOnInteract(ShowChatBox);
-        }
-        else
-        {
-            Debug.LogError($"The IteractableObject script must be attached to the {gameObject.name} game object.");
+            _interactableObject.SubscribeOnInteract(OnInteract);
         }
     }
 
-    private void ShowChatBox()
+    public void SetInteractable(bool isInteractable)
     {
-        Debug.Log("Show Chat Box!");
+        throw new NotImplementedException();
+    }
+
+    public void OnInteract()
+    {
+        ShowChatBox(true);
+    }
+
+    private void ShowChatBox(bool showChatBox)
+    {
+        if (_isChatBoxShown == showChatBox)
+        {
+            return;
+        }
+
+        _isChatBoxShown = showChatBox;
+        if (_chatBoxController)
+        {
+            _chatBoxController.gameObject.SetActive(showChatBox);
+        }
     }
 }

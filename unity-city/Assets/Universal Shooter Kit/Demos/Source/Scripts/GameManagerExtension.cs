@@ -8,21 +8,21 @@ public class GameManagerExtension : MonoBehaviour
     [SerializeField] private List<InteractableObject> _interactableObjects = new List<InteractableObject>();
     // TODO: move to the UIManager
     [SerializeField] private TextMeshProUGUI _interactionCallout;
-    [SerializeField] private ChatBoxController _chatBoxController;
+
     private bool _isHintShown = false;
 
     private void Start()
     {
         if (_interactableObjects.Any())
         {
-            foreach (var interactableObject in _interactableObjects)
+            foreach (var io in _interactableObjects)
             {
-                interactableObject.SubscribeOnShowHint(ShowInteractHint);
+                io.SubscribeOnShowHint(ShowInteractionCallout);
             }
         }
     }
 
-    private void ShowInteractHint(bool showHint)
+    private void ShowInteractionCallout(bool showHint)
     {
         if (_isHintShown == showHint)
         {

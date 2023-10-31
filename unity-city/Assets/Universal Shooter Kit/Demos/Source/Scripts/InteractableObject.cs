@@ -6,17 +6,25 @@ public class InteractableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _reactionRadius = 5.0f;
 
+    public Action OnInteractAction;
+
     private const string playerTag = "Player";
-    private Action _onInteract;
+    private Action _showChatBox;
+    private Action<Animator> _playAnimation;
     private Action<bool> _onPlayerEntered;
-    private SphereCollider _reactionZone;
+    
     private bool _isInteractable = true;
 
     private void Start()
     {
-        _reactionZone = GetComponent<SphereCollider>();
-        _reactionZone.radius = _reactionRadius;
-        _reactionZone.isTrigger = true;
+        SetReactionArea();
+    }
+
+    private void SetReactionArea()
+    {
+        var reactionArea = GetComponent<SphereCollider>();
+        reactionArea.radius = _reactionRadius;
+        reactionArea.isTrigger = true;
     }
 
     private void Update()
@@ -55,12 +63,13 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void SubscribeOnInteract(Action callback)
     {
-        _onInteract = callback;
+        OnInteractAction = callback;
     }
 
+    // 
     public void OnInteract()
     {
         Debug.Log($"An object {this} is activated");
-        _onInteract?.Invoke();
+        OnInteractAction?.Invoke();
     }
 }
