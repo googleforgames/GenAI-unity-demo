@@ -16,6 +16,9 @@ public class DynamicText : MonoBehaviour
     public GameObject objectToActivate4;
     public GameObject objectToActivate5;
     public GameObject objectToActivate6;
+    public GameObject objectToActivate7;
+    public GameObject objectToActivate8;
+    //public GameObject objectToActivate9;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -38,6 +41,9 @@ public class DynamicText : MonoBehaviour
         objectToActivate4.SetActive(true);
         objectToActivate5.SetActive(true);
         objectToActivate6.SetActive(true);
+        objectToActivate7.SetActive(true);
+        objectToActivate8.SetActive(true);
+        //objectToActivate9.SetActive(true);
 
         // Display Notification for X seconds
         StartCoroutine(DeactivateAfterDelay(7f));
