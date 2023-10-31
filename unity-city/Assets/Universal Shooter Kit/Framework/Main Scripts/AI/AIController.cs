@@ -781,12 +781,12 @@ namespace GercStudio.USK.Scripts
             } else
 #endif
 #endif
-            {
+           /*{
                 if (aiArea.allPlayersInScene.Count > 0 && aiArea.allPlayersInScene[0].player)
                 {
                     AIHelper.UILookAtCharacter(this, aiArea.allPlayersInScene[0].controller);
                 }
-            }
+            }*/
             
 #if USK_MULTIPLAYER
             if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom && !PhotonNetwork.IsMasterClient)
@@ -927,7 +927,7 @@ namespace GercStudio.USK.Scripts
             anim.SetBool("Grenade Reaction", grenadeEffect);
 
             if (!multiplayerBot)
-            {
+            {/*
                 ScanningProcess();
                 
                 ClearEmptyPlayers();
@@ -967,7 +967,7 @@ namespace GercStudio.USK.Scripts
                             }
                         }
                     }
-                }
+                }*/
             }
             else
             {
@@ -1050,6 +1050,8 @@ namespace GercStudio.USK.Scripts
 
         void LateUpdate()
         {
+
+            return;
             // if (isHuman)
             // {
                 var body = isHuman ? anim.GetBoneTransform(HumanBodyBones.Spine) : genericAvatarBody;
@@ -1335,6 +1337,7 @@ namespace GercStudio.USK.Scripts
 
         void ScanningProcess()
         {
+            return;
             if (aiArea.hasAnyPlayerInZone)
             {
                 allPlayersSeenByEnemy.Clear();
