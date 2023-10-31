@@ -19,11 +19,6 @@ public class Conversation : MonoBehaviour, IInteractable
         }
     }
 
-    public void SetInteractable(bool isInteractable)
-    {
-        throw new NotImplementedException();
-    }
-
     public void OnInteract()
     {
         ShowChatBox(true);

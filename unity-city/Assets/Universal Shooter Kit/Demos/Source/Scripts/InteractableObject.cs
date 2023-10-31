@@ -6,13 +6,12 @@ public class InteractableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _reactionRadius = 5.0f;
 
-    public Action OnInteractAction;
+    private Action _interact;
+    private Action _release;
+    private Action<bool> _playerEntered;
 
     private const string playerTag = "Player";
-    private Action _showChatBox;
-    private Action<Animator> _playAnimation;
-    private Action<bool> _onPlayerEntered;
-    
+
     private bool _isInteractable = true;
 
     private void Start()
@@ -33,13 +32,18 @@ public class InteractableObject : MonoBehaviour, IInteractable
         {
             OnInteract();
         }
+
+        if (_isInteractable && Input.GetKeyUp(KeyCode.E))
+        {
+            OnRelease();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(true);
+            _playerEntered?.Invoke(true);
         }
     }
 
@@ -47,7 +51,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         if (other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(false);
+            _playerEntered?.Invoke(false);
         }
     }
 
@@ -58,18 +62,28 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void SubscribeOnShowHint(Action<bool> callback)
     {
-        _onPlayerEntered = callback;
+        _playerEntered = callback;
     }
 
     public void SubscribeOnInteract(Action callback)
     {
-        OnInteractAction = callback;
+        _interact = callback;
     }
 
-    // 
+    public void SubscribeOnRelease(Action callback)
+    {
+        _release = callback;
+    }
+
     public void OnInteract()
     {
         Debug.Log($"An object {this} is activated");
-        OnInteractAction?.Invoke();
+        _interact?.Invoke();
+    }
+
+    private void OnRelease()
+    {
+        Debug.Log($"An object {this} is deactivated");
+        _release?.Invoke();
     }
 }
