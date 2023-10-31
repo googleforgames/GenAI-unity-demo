@@ -7,21 +7,22 @@ public class GameManagerExtension : MonoBehaviour
 {
     [SerializeField] private List<InteractableObject> _interactableObjects = new List<InteractableObject>();
     // TODO: move to the UIManager
-    [SerializeField] private TextMeshProUGUI _uiHint;
+    [SerializeField] private TextMeshProUGUI _interactionCallout;
+
     private bool _isHintShown = false;
 
     private void Start()
     {
         if (_interactableObjects.Any())
         {
-            foreach (var interactableObject in _interactableObjects)
+            foreach (var io in _interactableObjects)
             {
-                interactableObject.SubscribeOnShowHint(ShowInteractHint);
+                io.SubscribeOnShowHint(ShowInteractionCallout);
             }
         }
     }
 
-    private void ShowInteractHint(bool showHint)
+    private void ShowInteractionCallout(bool showHint)
     {
         if (_isHintShown == showHint)
         {
@@ -29,9 +30,9 @@ public class GameManagerExtension : MonoBehaviour
         }
 
         _isHintShown = showHint;
-        if (_uiHint)
+        if (_interactionCallout)
         {
-            _uiHint.gameObject.SetActive(showHint);
+            _interactionCallout.gameObject.SetActive(showHint);
         }
     }
 }

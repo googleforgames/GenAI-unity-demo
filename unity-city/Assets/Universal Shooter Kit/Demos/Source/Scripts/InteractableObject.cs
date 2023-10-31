@@ -6,17 +6,24 @@ public class InteractableObject : MonoBehaviour, IInteractable
 {
     [SerializeField] private float _reactionRadius = 5.0f;
 
+    private Action _interact;
+    private Action _release;
+    private Action<bool> _playerEntered;
+
     private const string playerTag = "Player";
-    private Action _onInteract;
-    private Action<bool> _onPlayerEntered;
-    private SphereCollider _reactionZone;
+
     private bool _isInteractable = true;
 
     private void Start()
     {
-        _reactionZone = GetComponent<SphereCollider>();
-        _reactionZone.radius = _reactionRadius;
-        _reactionZone.isTrigger = true;
+        SetReactionArea();
+    }
+
+    private void SetReactionArea()
+    {
+        var reactionArea = GetComponent<SphereCollider>();
+        reactionArea.radius = _reactionRadius;
+        reactionArea.isTrigger = true;
     }
 
     private void Update()
@@ -25,13 +32,18 @@ public class InteractableObject : MonoBehaviour, IInteractable
         {
             OnInteract();
         }
+
+        if (_isInteractable && Input.GetKeyUp(KeyCode.E))
+        {
+            OnRelease();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(true);
+            _playerEntered?.Invoke(true);
         }
     }
 
@@ -39,7 +51,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         if (other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(false);
+            _playerEntered?.Invoke(false);
         }
     }
 
@@ -50,17 +62,28 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     public void SubscribeOnShowHint(Action<bool> callback)
     {
-        _onPlayerEntered = callback;
+        _playerEntered = callback;
     }
 
     public void SubscribeOnInteract(Action callback)
     {
-        _onInteract = callback;
+        _interact = callback;
+    }
+
+    public void SubscribeOnRelease(Action callback)
+    {
+        _release = callback;
     }
 
     public void OnInteract()
     {
         Debug.Log($"An object {this} is activated");
-        _onInteract?.Invoke();
+        _interact?.Invoke();
+    }
+
+    private void OnRelease()
+    {
+        Debug.Log($"An object {this} is deactivated");
+        _release?.Invoke();
     }
 }
