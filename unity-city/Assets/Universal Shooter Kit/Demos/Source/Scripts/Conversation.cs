@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Conversation : MonoBehaviour, IInteractable
 {
-    [SerializeField] private List<string> _dummyDialogue;
+    public List<string> _npcAnswerList;
 
     private InteractableObject _interactableObject;
 
@@ -18,6 +18,7 @@ public class Conversation : MonoBehaviour, IInteractable
 
     public void OnInteract()
     {
-        _interactableObject.ShowChatBox?.Invoke();
+        var dummyDialogue = new Dialogue("", "", _npcAnswerList);
+        _interactableObject.ShowChatBox?.Invoke(dummyDialogue);
     }
 }

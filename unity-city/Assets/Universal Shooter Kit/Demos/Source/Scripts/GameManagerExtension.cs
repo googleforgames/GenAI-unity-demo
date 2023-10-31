@@ -22,7 +22,7 @@ public class GameManagerExtension : MonoBehaviour
         foreach (var io in _interactableObjects)
         {
             io.SubscribeOnShowHint(ShowInteractionCallout);
-            io.SubscribeOnShowChatBox(ShowChatBox);
+            io.SubscribeOnShowChatBox(OnShowChatBox);
         }
     }
 
@@ -45,12 +45,15 @@ public class GameManagerExtension : MonoBehaviour
         }
     }
 
-    public void ShowChatBox()
+    private void OnShowChatBox(Dialogue dialogue)
     {
-        if (_chatBoxController)
+        if (!_chatBoxController)
         {
-            _chatBoxController.gameObject.SetActive(true);
+            return;
         }
+
+        _chatBoxController.DummyDialogue = dialogue;
+        _chatBoxController.gameObject.SetActive(true);
     }
 
     public void HideChatBox()

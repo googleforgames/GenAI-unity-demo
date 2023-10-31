@@ -1,12 +1,14 @@
-using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
 
 public class ChatBoxController : MonoBehaviour
 {
+    public Dialogue DummyDialogue { get; set; }
+
     [SerializeField] private TextMeshProUGUI _npcName;
-    [SerializeField] private TextMeshProUGUI _lastNPCReplicText;
+    [SerializeField] private TextMeshProUGUI _lastNPCReplicLabel;
     [SerializeField] private TextMeshProUGUI _playerName;
     [SerializeField] private TextMeshProUGUI _lastPlayerReplicLabel;
     [SerializeField] private TMP_InputField _inputField;
@@ -14,6 +16,9 @@ public class ChatBoxController : MonoBehaviour
 
     private string _lastNPCReplic = "";
     private string _lastPlayerReplic = "";
+
+    private bool _isInputEnabled = false;
+    private int _nextAnswerIndex = 0;
 
     private void Start()
     {
@@ -29,6 +34,10 @@ public class ChatBoxController : MonoBehaviour
     private void Update()
     {
         // TODO Input:
+        if (_isInputEnabled && Input.GetKeyDown(KeyCode.Return))
+        {
+            ShowNextAnswer();
+        }
         // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
         // Pressing enter ends the line and sends the text and waits for the reply.
         // When the text is sent, it is shown at the bottom with the following format:
@@ -47,6 +56,11 @@ public class ChatBoxController : MonoBehaviour
     {
         _closeButton.onClick.RemoveAllListeners();
         _inputField.onValueChanged.RemoveAllListeners();
+    }
+
+    private void ShowNextAnswer()
+    {
+        _lastNPCReplicLabel.text = DummyDialogue.AnswerList[_nextAnswerIndex++];
     }
 
     private void OnCloseButtonPressed()
@@ -74,12 +88,14 @@ public class ChatBoxController : MonoBehaviour
 
     private void EnableInput()
     {
+        _isInputEnabled = true;
         ShowUIElement(_inputField.gameObject);
         HideUIElement(_lastPlayerReplicLabel.gameObject);
     }
 
     private void DisableInput()
     {
+        _isInputEnabled = false;
         HideUIElement(_inputField.gameObject);
         ShowUIElement(_lastPlayerReplicLabel.gameObject);
     }

@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
 public class InteractableObject : MonoBehaviour, IInteractable
 {
-    public Action ShowChatBox;
+    public Action<Dialogue> ShowChatBox;
 
     [SerializeField] private float _reactionRadius = 5.0f;
 
@@ -79,7 +80,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
         _release = callback;
     }
 
-    public void SubscribeOnShowChatBox(Action callback)
+    public void SubscribeOnShowChatBox(Action<Dialogue> callback)
     {
         ShowChatBox = callback;
     }
