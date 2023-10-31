@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +14,6 @@ public class PickUp : MonoBehaviour, IInteractable
         {
             _interactableObject.SubscribeOnInteract(OnInteract);
         }
-    }
-
-    public void SetInteractable(bool isInteractable)
-    {
-        throw new NotImplementedException();
     }
 
     public void OnInteract()

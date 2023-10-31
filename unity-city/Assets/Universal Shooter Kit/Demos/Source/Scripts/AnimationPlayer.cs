@@ -9,16 +9,16 @@ public class AnimationPlayer : MonoBehaviour, IInteractable
     [SerializeField] private string _forwardAnimationTrigger;
     [SerializeField] private string _backwardAnimationTrigger;
 
-    public List<PickUp> Inventory = new List<PickUp>();
-
     private void Start()
     {
         _interactableObject = GetComponent<InteractableObject>();
-        if (_interactableObject)
+        if (!_interactableObject)
         {
-            _interactableObject.SubscribeOnInteract(OnInteract);
-            _interactableObject.SubscribeOnRelease(OnRelease);
+            return;
         }
+
+        _interactableObject.SubscribeOnInteract(OnInteract);
+        _interactableObject.SubscribeOnRelease(OnRelease);
     }
 
     public void OnInteract()
