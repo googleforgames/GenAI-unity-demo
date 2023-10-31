@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +50,8 @@ namespace GercStudio.USK.Scripts
 
         public GameObject secondCharacter;
         public GameObject secondCharGO;
+
+        private GameManagerExtension _gameGamagerExtension;
 
         void Awake()
         {
@@ -186,6 +189,8 @@ namespace GercStudio.USK.Scripts
             }
             
             CurrentCharacter = 0;
+
+            _gameGamagerExtension = GetComponent<GameManagerExtension>();
         }
 
         public void SwitchCharacter()
@@ -381,7 +386,14 @@ namespace GercStudio.USK.Scripts
                         if (inventoryManager[CurrentCharacter].Controller.UIManager.CharacterUI.Inventory.MainObject.activeSelf)
                             return;
 
-                    Pause(true);
+                    if (_gameGamagerExtension.IsChatBoxShown())
+                    {
+                        _gameGamagerExtension.HideChatBox();
+                    }
+                    else
+                    {
+                        Pause(true);
+                    }
                 }
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using Button = UnityEngine.UI.Button;
@@ -17,7 +18,7 @@ public class ChatBoxController : MonoBehaviour
     private void Start()
     {
         _inputField.onValueChanged.AddListener(SendMessageToChat);
-        _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
+        _closeButton.onClick.AddListener(OnCloseButtonPressed);
     }
 
     private void OnEnable()
@@ -46,6 +47,11 @@ public class ChatBoxController : MonoBehaviour
     {
         _closeButton.onClick.RemoveAllListeners();
         _inputField.onValueChanged.RemoveAllListeners();
+    }
+
+    private void OnCloseButtonPressed()
+    {
+        gameObject.SetActive(false);
     }
 
     /// <summary>

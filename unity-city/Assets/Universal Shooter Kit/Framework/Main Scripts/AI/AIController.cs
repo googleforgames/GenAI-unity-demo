@@ -541,6 +541,7 @@ namespace GercStudio.USK.Scripts
             currentWayPointIndex = 0;
             previousWayPointIndex = 0;
 
+            if (!aiArea) return;
             if (aiArea && aiArea.globalAttackState && aiArea.communicationBetweenAIs == AIHelper.CommunicationBetweenAIs.CommunicateWithEachOther)
             {
                 currentState = AIHelper.EnemyStates.Attack;

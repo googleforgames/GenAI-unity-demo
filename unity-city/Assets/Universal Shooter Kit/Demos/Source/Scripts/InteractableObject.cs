@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class InteractableObject : MonoBehaviour, IInteractable
 {
+    public Action ShowChatBox;
+
     [SerializeField] private float _reactionRadius = 5.0f;
 
     private Action _interact;
@@ -12,7 +14,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     private const string playerTag = "Player";
 
-    private bool _isInteractable = true;
+    private bool _isInteractable = false;
 
     private void Start()
     {
@@ -43,6 +45,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         if (other.gameObject.CompareTag(playerTag))
         {
+            SetInteractable(true);
             _playerEntered?.Invoke(true);
         }
     }
@@ -51,6 +54,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         if (other.gameObject.CompareTag(playerTag))
         {
+            SetInteractable(false);
             _playerEntered?.Invoke(false);
         }
     }
@@ -73,6 +77,11 @@ public class InteractableObject : MonoBehaviour, IInteractable
     public void SubscribeOnRelease(Action callback)
     {
         _release = callback;
+    }
+
+    public void SubscribeOnShowChatBox(Action callback)
+    {
+        ShowChatBox = callback;
     }
 
     public void OnInteract()
