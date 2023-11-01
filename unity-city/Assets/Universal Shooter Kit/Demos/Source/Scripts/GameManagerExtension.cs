@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -5,11 +6,14 @@ using UnityEngine;
 
 public class GameManagerExtension : MonoBehaviour
 {
-    [SerializeField] private ChatBoxController _chatBoxController;
     [SerializeField] private List<InteractableObject> _interactableObjects = new List<InteractableObject>();
-    // TODO: move to the UIManager
-    [SerializeField] private TextMeshProUGUI _interactionCallout;
 
+    // TODO: move to the UIManager
+    [SerializeField] private ChatBoxController _chatBoxController;
+    [SerializeField] private TextMeshProUGUI _interactionCallout;
+    [SerializeField] private float _answerDelay = 0.5f;
+
+    private Dialogue _dummyDialogue;
     private bool _isHintShown = false;
 
     private void Start()
@@ -26,9 +30,44 @@ public class GameManagerExtension : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        // TODO Input:
+        if (_chatBoxController.IsInputEnabled && Input.GetKeyDown(KeyCode.Return))
+        {
+            StartCoroutine(ShowAnswerCoroutine("", _answerDelay));
+        }
+        // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
+        // Pressing enter ends the line and sends the text and waits for the reply.
+        // When the text is sent, it is shown at the bottom with the following format:
+        // PlayerName: TEXT.
+        // The reply from the alien is shown at the top of the chat box with the following format:
+        // AlienName: RESPONSE.
+            
+        // Text box showing the text written by the player.
+        // Previous player message shown above the text box.
+        // Top of the Conversation widget:
+        // Last NPC message (As shown in the following mockup)
+
+    }
+
+    private IEnumerator ShowAnswerCoroutine(string question, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        _chatBoxController.ShowAnswer(_dummyDialogue.GetAnswer(question));
+    }
+
     public bool IsChatBoxShown()
     {
         return _chatBoxController && _chatBoxController.gameObject.activeInHierarchy;
+    }
+
+    public void HideChatBox()
+    {
+        if (_chatBoxController)
+        {
+            _chatBoxController.gameObject.SetActive(false);
+        }
     }
 
     private void ShowInteractionCallout(bool showHint)
@@ -45,22 +84,15 @@ public class GameManagerExtension : MonoBehaviour
         }
     }
 
-    private void OnShowChatBox(Dialogue dialogue)
+    private void OnShowChatBox(Dialogue dialogue, string playerName, string npcName)
     {
         if (!_chatBoxController)
         {
             return;
         }
 
-        _chatBoxController.DummyDialogue = dialogue;
+        _dummyDialogue = dialogue;
+        _chatBoxController.SetNames(playerName, npcName);
         _chatBoxController.gameObject.SetActive(true);
-    }
-
-    public void HideChatBox()
-    {
-        if (_chatBoxController)
-        {
-            _chatBoxController.gameObject.SetActive(false);
-        }
     }
 }

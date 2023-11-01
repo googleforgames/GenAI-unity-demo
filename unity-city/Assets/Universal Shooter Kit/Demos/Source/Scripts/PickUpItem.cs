@@ -1,23 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PickUpItem : MonoBehaviour, IInteractable
 {
     private bool canInteract = false;
     private int playersInteracting = 0;
-
-
-    public void OnInteract()
-    {
-    
-    }
-
-    public void SetInteractable(bool isInteractable)
-    {
-        throw new NotImplementedException();
-    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -42,23 +28,16 @@ public class PickUpItem : MonoBehaviour, IInteractable
         }
     }
 
-    public void SubscribeOnInteract(Action callback)
-    {
-        throw new NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && canInteract)
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void OnInteract(string playerName, string objectName)
+    {
+        
     }
 }

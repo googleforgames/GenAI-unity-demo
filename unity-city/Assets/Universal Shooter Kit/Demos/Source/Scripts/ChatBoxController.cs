@@ -1,24 +1,18 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Button = UnityEngine.UI.Button;
 
 public class ChatBoxController : MonoBehaviour
 {
-    public Dialogue DummyDialogue { get; set; }
-
-    [SerializeField] private TextMeshProUGUI _npcName;
+    [FormerlySerializedAs("_npcName")] [SerializeField] private TextMeshProUGUI _npcNameLabel;
     [SerializeField] private TextMeshProUGUI _lastNPCReplicLabel;
-    [SerializeField] private TextMeshProUGUI _playerName;
+    [FormerlySerializedAs("_playerName")] [SerializeField] private TextMeshProUGUI _playerNameLabel;
     [SerializeField] private TextMeshProUGUI _lastPlayerReplicLabel;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button _closeButton;
 
-    private string _lastNPCReplic = "";
-    private string _lastPlayerReplic = "";
-
-    private bool _isInputEnabled = false;
-    private int _nextAnswerIndex = 0;
+    public bool IsInputEnabled { get; private set; } = false;
 
     private void Start()
     {
@@ -28,28 +22,9 @@ public class ChatBoxController : MonoBehaviour
 
     private void OnEnable()
     {
+        _lastNPCReplicLabel.text = string.Empty;
+        _lastPlayerReplicLabel.text = string.Empty;
         EnableInput();
-    }
-
-    private void Update()
-    {
-        // TODO Input:
-        if (_isInputEnabled && Input.GetKeyDown(KeyCode.Return))
-        {
-            ShowNextAnswer();
-        }
-        // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
-        // Pressing enter ends the line and sends the text and waits for the reply.
-        // When the text is sent, it is shown at the bottom with the following format:
-        // PlayerName: TEXT.
-        // The reply from the alien is shown at the top of the chat box with the following format:
-        // AlienName: RESPONSE.
-            
-        // Text box showing the text written by the player.
-        // Previous player message shown above the text box.
-        // Top of the Conversation widget:
-        // Last NPC message (As shown in the following mockup)
-
     }
 
     private void OnDestroy()
@@ -58,17 +33,15 @@ public class ChatBoxController : MonoBehaviour
         _inputField.onValueChanged.RemoveAllListeners();
     }
 
-    private void ShowNextAnswer()
+    public void SetNames(string playerName, string objectName)
     {
-        if (_nextAnswerIndex < DummyDialogue.AnswerList.Count)
-        {
-            _lastNPCReplicLabel.text = DummyDialogue.AnswerList[_nextAnswerIndex++];
-        }
+        _playerNameLabel.text = playerName;
+        _npcNameLabel.text = objectName;
     }
 
-    private void OnCloseButtonPressed()
+    public void ShowAnswer(string answer)
     {
-        gameObject.SetActive(false);
+        _lastNPCReplicLabel.text = answer;
     }
 
     /// <summary>
@@ -80,25 +53,30 @@ public class ChatBoxController : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(npcName))
         {
-            _npcName.text = npcName;
+            _npcNameLabel.text = npcName;
         }
 
         if (!string.IsNullOrEmpty(playerName))
         {
-            _playerName.text = playerName;
+            _playerNameLabel.text = playerName;
         }
     }
 
     private void EnableInput()
     {
-        _isInputEnabled = true;
+        IsInputEnabled = true;
         ShowUIElement(_inputField.gameObject);
         HideUIElement(_lastPlayerReplicLabel.gameObject);
     }
 
+    private void OnCloseButtonPressed()
+    {
+        gameObject.SetActive(false);
+    }
+
     private void DisableInput()
     {
-        _isInputEnabled = false;
+        IsInputEnabled = false;
         HideUIElement(_inputField.gameObject);
         ShowUIElement(_lastPlayerReplicLabel.gameObject);
     }
