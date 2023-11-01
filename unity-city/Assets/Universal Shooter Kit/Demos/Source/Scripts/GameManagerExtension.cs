@@ -1,24 +1,27 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using GercStudio.USK.Scripts;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManagerExtension : MonoBehaviour
 {
     [SerializeField] private List<InteractableObject> _interactableObjects = new List<InteractableObject>();
 
     // TODO: move to the UIManager
-    [SerializeField] private ChatBoxController _chatBoxController;
+    [FormerlySerializedAs("_chatBoxController")] [SerializeField] private ChatBoxController _chatBox;
     [SerializeField] private TextMeshProUGUI _interactionCallout;
-    [SerializeField] private float _minAnswerDelay = 0.2f;
-    [SerializeField] private float _maxAnswerDelay = 0.9f;
 
+    private GameManager _gameManager;
     private Dialogue _dummyDialogue;
     private bool _isHintShown = false;
 
     private void Start()
     {
+        _gameManager = GetComponent<GameManager>();
+        _chatBox.SubscribeOnCloseButton(HideChatBox);
+
         if (!_interactableObjects.Any())
         {
             return;
@@ -27,17 +30,16 @@ public class GameManagerExtension : MonoBehaviour
         foreach (var io in _interactableObjects)
         {
             io.SubscribeOnShowHint(ShowInteractionCallout);
-            io.SubscribeOnShowChatBox(OnShowChatBox);
+            io.SubscribeOnShowChatBox(OnShowChatBox, this);
         }
     }
 
     private void Update()
     {
         // TODO Input:
-        if (_chatBoxController.IsInputEnabled && Input.GetKeyDown(KeyCode.Return))
+        if (_chatBox.IsInputEnabled && _chatBox.HasPlayerInput && Input.GetKeyDown(KeyCode.Return))
         {
-            var answerDelay = Random.Range(_minAnswerDelay, _maxAnswerDelay);
-            StartCoroutine(ShowAnswerCoroutine("", answerDelay));
+            _chatBox.SendMessageToChat(_dummyDialogue.GetAnswer(""));
         }
         // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
         // Pressing enter ends the line and sends the text and waits for the reply.
@@ -53,22 +55,17 @@ public class GameManagerExtension : MonoBehaviour
 
     }
 
-    private IEnumerator ShowAnswerCoroutine(string question, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        _chatBoxController.ShowNPCAnswer(_dummyDialogue.GetAnswer(question));
-    }
-
     public bool IsChatBoxShown()
     {
-        return _chatBoxController && _chatBoxController.gameObject.activeInHierarchy;
+        return _chatBox && _chatBox.gameObject.activeInHierarchy;
     }
 
     public void HideChatBox()
     {
-        if (_chatBoxController)
+        _gameManager.Pause(false);
+        if (_chatBox)
         {
-            _chatBoxController.gameObject.SetActive(false);
+            _chatBox.gameObject.SetActive(false);
         }
     }
 
@@ -88,13 +85,14 @@ public class GameManagerExtension : MonoBehaviour
 
     private void OnShowChatBox(Dialogue dialogue, string playerName, string npcName)
     {
-        if (!_chatBoxController)
+        if (!_chatBox)
         {
             return;
         }
 
+        _gameManager.Pause(false);
         _dummyDialogue = dialogue;
-        _chatBoxController.SetNames(playerName, npcName);
-        _chatBoxController.gameObject.SetActive(true);
+        _chatBox.SetNames(playerName, npcName);
+        _chatBox.gameObject.SetActive(true);
     }
 }

@@ -95,23 +95,23 @@ namespace GercStudio.USK.Scripts
 
             // StartCoroutine("SpawnEnemies");
 
-            if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit)
-                currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit.onClick.AddListener(ExitGame);
-
-            if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart)
-                currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart.onClick.AddListener(RestartScene);
-
-            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume)
-                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate { Pause(true); });
-            
-            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit)
-                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit.onClick.AddListener(ExitGame);
-
-            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options)
-                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options.onClick.AddListener(OptionsMenu);
-
-            if (currentUIManager.gameOptions.back)
-                currentUIManager.gameOptions.back.onClick.AddListener(OptionsMenu);
+            // if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit)
+            //     currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit.onClick.AddListener(ExitGame);
+            //
+            // if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart)
+            //     currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart.onClick.AddListener(RestartScene);
+            //
+            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume)
+            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate { Pause(true); });
+            //
+            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit)
+            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit.onClick.AddListener(ExitGame);
+            //
+            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options)
+            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options.onClick.AddListener(OptionsMenu);
+            //
+            // if (currentUIManager.gameOptions.back)
+            //     currentUIManager.gameOptions.back.onClick.AddListener(OptionsMenu);
         }
 
         private void Start()
@@ -353,15 +353,18 @@ namespace GercStudio.USK.Scripts
             if(!gameStarted || Characters.Count == 0 || controllers.Count <= 0 || !controllers[CurrentCharacter] || inventoryManager.Count <= 0 || !inventoryManager[CurrentCharacter])
                 return;
             
-            if (controllers[CurrentCharacter].projectSettings.ButtonsActivityStatuses[18] && (InputHelper.WasKeyboardOrMouseButtonPressed(projectSettings.keyboardButtonsInUnityInputSystem[18])
-                || InputHelper.WasGamepadButtonPressed(projectSettings.gamepadButtonsInUnityInputSystem[16], controllers[CurrentCharacter])))
-                
-                // (Input.GetKeyDown(controllers[CurrentCharacter]._gamepadCodes[16]) || Input.GetKeyDown(controllers[CurrentCharacter]._keyboardCodes[18]) ||
-                //     Helper.CheckGamepadAxisButton(16, controllers[CurrentCharacter]._gamepadButtonsAxes, controllers[CurrentCharacter].hasAxisButtonPressed, 
-                //         "GetKeyDown", controllers[CurrentCharacter].projectSettings.AxisButtonValues[16])))
-            {
-                SwitchCharacter();
-            }
+            // if (controllers[CurrentCharacter].projectSettings.ButtonsActivityStatuses[18] && (InputHelper.WasKeyboardOrMouseButtonPressed(projectSettings.keyboardButtonsInUnityInputSystem[18])
+            //     || InputHelper.WasGamepadButtonPressed(projectSettings.gamepadButtonsInUnityInputSystem[16], controllers[CurrentCharacter])))
+            //     
+            //     // (Input.GetKeyDown(controllers[CurrentCharacter]._gamepadCodes[16]) || Input.GetKeyDown(controllers[CurrentCharacter]._keyboardCodes[18]) ||
+            //     //     Helper.CheckGamepadAxisButton(16, controllers[CurrentCharacter]._gamepadButtonsAxes, controllers[CurrentCharacter].hasAxisButtonPressed, 
+            //     //         "GetKeyDown", controllers[CurrentCharacter].projectSettings.AxisButtonValues[16])))
+            // {
+            //     if (!_gameGamagerExtension.IsChatBoxShown())
+            //     {
+            //         SwitchCharacter();
+            //     }
+            // }
 
             if (controllers[CurrentCharacter].health <= 0)
             {
@@ -437,19 +440,20 @@ namespace GercStudio.USK.Scripts
         public void Pause(bool showUI)
         {
             isPause = !isPause;
-            
+
             SwitchMenu("null");
 
             if (!isPause)
                 isOptions = false;
 
             controllers[CurrentCharacter].CameraController.canUseCursorInPause = true;
+            controllers[CurrentCharacter].isCharacterInLobby = isPause;
 
             if (isPause)
             {
                 AudioListener.pause = true;
                 controllers[CurrentCharacter].isPause = true;
-                UIHelper.ManageUIButtons(controllers[CurrentCharacter], controllers[CurrentCharacter].inventoryManager, currentUIManager, controllers[CurrentCharacter].CharacterSync);
+                // UIHelper.ManageUIButtons(controllers[CurrentCharacter], controllers[CurrentCharacter].inventoryManager, currentUIManager, controllers[CurrentCharacter].CharacterSync);
 
             }
             else
