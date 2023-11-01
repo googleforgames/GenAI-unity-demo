@@ -1,13 +1,12 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Button = UnityEngine.UI.Button;
 
 public class ChatBoxController : MonoBehaviour
 {
-    [FormerlySerializedAs("_npcName")] [SerializeField] private TextMeshProUGUI _npcNameLabel;
+    [SerializeField] private TextMeshProUGUI _npcNameLabel;
     [SerializeField] private TextMeshProUGUI _lastNPCReplicLabel;
-    [FormerlySerializedAs("_playerName")] [SerializeField] private TextMeshProUGUI _playerNameLabel;
+    [SerializeField] private TextMeshProUGUI _playerNameLabel;
     [SerializeField] private TextMeshProUGUI _lastPlayerReplicLabel;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button _closeButton;
@@ -39,27 +38,9 @@ public class ChatBoxController : MonoBehaviour
         _npcNameLabel.text = objectName;
     }
 
-    public void ShowAnswer(string answer)
+    public void ShowNPCAnswer(string answer)
     {
         _lastNPCReplicLabel.text = answer;
-    }
-
-    /// <summary>
-    /// Must be called when the chat box is shown
-    /// </summary>
-    /// <param name="npcName"></param>
-    /// <param name="playerName"></param>
-    public void Setup(string npcName, string playerName)
-    {
-        if (!string.IsNullOrEmpty(npcName))
-        {
-            _npcNameLabel.text = npcName;
-        }
-
-        if (!string.IsNullOrEmpty(playerName))
-        {
-            _playerNameLabel.text = playerName;
-        }
     }
 
     private void EnableInput()

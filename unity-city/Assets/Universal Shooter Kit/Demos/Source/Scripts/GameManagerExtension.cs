@@ -11,7 +11,8 @@ public class GameManagerExtension : MonoBehaviour
     // TODO: move to the UIManager
     [SerializeField] private ChatBoxController _chatBoxController;
     [SerializeField] private TextMeshProUGUI _interactionCallout;
-    [SerializeField] private float _answerDelay = 0.5f;
+    [SerializeField] private float _minAnswerDelay = 0.2f;
+    [SerializeField] private float _maxAnswerDelay = 0.9f;
 
     private Dialogue _dummyDialogue;
     private bool _isHintShown = false;
@@ -35,7 +36,8 @@ public class GameManagerExtension : MonoBehaviour
         // TODO Input:
         if (_chatBoxController.IsInputEnabled && Input.GetKeyDown(KeyCode.Return))
         {
-            StartCoroutine(ShowAnswerCoroutine("", _answerDelay));
+            var answerDelay = Random.Range(_minAnswerDelay, _maxAnswerDelay);
+            StartCoroutine(ShowAnswerCoroutine("", answerDelay));
         }
         // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
         // Pressing enter ends the line and sends the text and waits for the reply.
@@ -54,7 +56,7 @@ public class GameManagerExtension : MonoBehaviour
     private IEnumerator ShowAnswerCoroutine(string question, float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        _chatBoxController.ShowAnswer(_dummyDialogue.GetAnswer(question));
+        _chatBoxController.ShowNPCAnswer(_dummyDialogue.GetAnswer(question));
     }
 
     public bool IsChatBoxShown()
