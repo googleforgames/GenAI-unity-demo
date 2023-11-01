@@ -16,7 +16,7 @@ public class PickUp : MonoBehaviour, IInteractable
         }
     }
 
-    public void OnInteract()
+    public void OnInteract(string playerName, string objectName)
     {
         Inventory.Add(this);
         gameObject.SetActive(false);

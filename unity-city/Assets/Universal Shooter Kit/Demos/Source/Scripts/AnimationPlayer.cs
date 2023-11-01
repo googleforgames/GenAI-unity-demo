@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AnimationPlayer : MonoBehaviour, IInteractable
@@ -21,7 +19,7 @@ public class AnimationPlayer : MonoBehaviour, IInteractable
         _interactableObject.SubscribeOnRelease(OnRelease);
     }
 
-    public void OnInteract()
+    public void OnInteract(string playerName, string objectName)
     {
         if (_animator)
         {

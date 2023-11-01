@@ -1,15 +1,17 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class InteractableObject : MonoBehaviour, IInteractable
+public class InteractableObject : MonoBehaviour
 {
-    public Action<Dialogue> ShowChatBox;
+    public Action<Dialogue, string, string> ShowChatBox;
+
+    public string PlayerName { get; private set; }
+    public string ObjectName { get; private set; }
 
     [SerializeField] private float _reactionRadius = 5.0f;
 
-    private Action _interact;
+    private Action<string, string> _interact;
     private Action _release;
     private Action<bool> _playerEntered;
 
@@ -19,6 +21,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     private void Start()
     {
+        ObjectName = gameObject.name;
         SetReactionArea();
     }
 
@@ -33,31 +36,36 @@ public class InteractableObject : MonoBehaviour, IInteractable
     {
         if (_isInteractable && Input.GetKeyDown(KeyCode.E))
         {
-            OnInteract();
+            Interact();
         }
 
         if (_isInteractable && Input.GetKeyUp(KeyCode.E))
         {
-            OnRelease();
+            Release();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(playerTag))
+        if (!other.gameObject.CompareTag(playerTag))
         {
-            SetInteractable(true);
-            _playerEntered?.Invoke(true);
+            return;
         }
+
+        PlayerName = other.name;
+        SetInteractable(true);
+        _playerEntered?.Invoke(true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(playerTag))
+        if (!other.gameObject.CompareTag(playerTag))
         {
-            SetInteractable(false);
-            _playerEntered?.Invoke(false);
+            return;
         }
+
+        SetInteractable(false);
+        _playerEntered?.Invoke(false);
     }
 
     public void SetInteractable(bool isInteractable)
@@ -70,7 +78,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
         _playerEntered = callback;
     }
 
-    public void SubscribeOnInteract(Action callback)
+    public void SubscribeOnInteract(Action<string, string> callback)
     {
         _interact = callback;
     }
@@ -80,20 +88,18 @@ public class InteractableObject : MonoBehaviour, IInteractable
         _release = callback;
     }
 
-    public void SubscribeOnShowChatBox(Action<Dialogue> callback)
+    public void SubscribeOnShowChatBox(Action<Dialogue, string, string> callback)
     {
         ShowChatBox = callback;
     }
 
-    public void OnInteract()
+    public void Interact()
     {
-        Debug.Log($"An object {this} is activated");
-        _interact?.Invoke();
+        _interact?.Invoke(PlayerName, ObjectName);
     }
 
-    private void OnRelease()
+    private void Release()
     {
-        Debug.Log($"An object {this} is deactivated");
         _release?.Invoke();
     }
 }
