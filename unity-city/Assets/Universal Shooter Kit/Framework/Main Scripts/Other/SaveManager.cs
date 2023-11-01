@@ -125,15 +125,15 @@ namespace GercStudio.USK.Scripts
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                SaveData();
-            }
+            //if (Input.GetKeyDown(KeyCode.I))
+            //{
+            //    SaveData();
+            //}
             
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            //if (Input.GetKeyDown(KeyCode.U))
+            //{
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //}
             
             if (Input.GetKeyDown(KeyCode.J))
             {
