@@ -1,20 +1,36 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MainMenu : MonoBehaviour
 {
-  [SerializeField] private TMP_InputField serverIpField;
-  [SerializeField] private TMP_InputField serverPortField;
+    [FormerlySerializedAs("serverIpField")] [SerializeField]
+    private TMP_InputField _serverIpField;
 
-  private void Start()
-  {
-    if (ClientSingleton.Instance == null) { return; }
+    [FormerlySerializedAs("serverPortField")] [SerializeField]
+    private TMP_InputField _serverPortField;
 
-    Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
-  }
+    private void Start()
+    {
+        if (ClientSingleton.Instance == null)
+        {
+            return;
+        }
 
-  public void StartClient()
-  {
-    ClientSingleton.Instance.GameManager.StartClient(serverIpField.text, int.Parse(serverPortField.text));
-  }
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+
+        _serverIpField.text = PlayerPrefs.GetString("LastIp");
+        _serverPortField.text = PlayerPrefs.GetString("LastPort");
+    }
+
+    public void StartClient()
+    {
+        string ip = _serverIpField.text;
+        string port = _serverPortField.text;
+        
+        PlayerPrefs.SetString("LastIp", ip);
+        PlayerPrefs.SetString("LastPort", port);
+        
+        ClientSingleton.Instance.GameManager.StartClient(ip, int.Parse(port));
+    }
 }
