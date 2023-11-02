@@ -15,9 +15,10 @@ public class InteractableObject : MonoBehaviour
     private Action _release;
     private Action<bool> _playerEntered;
 
+    private GameManagerExtension _gameManager;
     private const string playerTag = "Player";
 
-    private bool _isInteractable = false;
+    public bool IsInteractable { get; private set; } = false;
 
     private void Start()
     {
@@ -34,12 +35,12 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        if (_isInteractable && Input.GetKeyDown(KeyCode.E))
+        if (IsInteractable && !_gameManager.IsChatBoxShown() && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
 
-        if (_isInteractable && Input.GetKeyUp(KeyCode.E))
+        if (IsInteractable && !_gameManager.IsChatBoxShown() && Input.GetKeyUp(KeyCode.E))
         {
             Release();
         }
@@ -70,7 +71,7 @@ public class InteractableObject : MonoBehaviour
 
     public void SetInteractable(bool isInteractable)
     {
-        _isInteractable = isInteractable;
+        IsInteractable = isInteractable;
     }
 
     public void SubscribeOnShowHint(Action<bool> callback)
@@ -88,8 +89,9 @@ public class InteractableObject : MonoBehaviour
         _release = callback;
     }
 
-    public void SubscribeOnShowChatBox(Action<Dialogue, string, string> callback)
+    public void SubscribeOnShowChatBox(Action<Dialogue, string, string> callback, GameManagerExtension gameManagerExtension)
     {
+        _gameManager ??= gameManagerExtension;
         ShowChatBox = callback;
     }
 

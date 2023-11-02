@@ -974,7 +974,8 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 					_mouseAbsolute.x = -17;
 //					_mouseAbsolute.y = 55;
 				}
-				
+
+				if (!body) return;
 				body.rotation = desiredRotation;
 
 				Controller.TopBodyOffset();

@@ -1,23 +1,30 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.Events;
 using Button = UnityEngine.UI.Button;
+using Random = UnityEngine.Random;
 
 public class ChatBoxController : MonoBehaviour
 {
-    [FormerlySerializedAs("_npcName")] [SerializeField] private TextMeshProUGUI _npcNameLabel;
+    [SerializeField] private TextMeshProUGUI _npcNameLabel;
     [SerializeField] private TextMeshProUGUI _lastNPCReplicLabel;
-    [FormerlySerializedAs("_playerName")] [SerializeField] private TextMeshProUGUI _playerNameLabel;
+    [SerializeField] private TextMeshProUGUI _playerNameLabel;
     [SerializeField] private TextMeshProUGUI _lastPlayerReplicLabel;
     [SerializeField] private TMP_InputField _inputField;
-    [SerializeField] private Button _closeButton;
+    [SerializeField] public Button _closeButton;
+
+    [SerializeField] private float _minAnswerDelay = 0.2f;
+    [SerializeField] private float _maxAnswerDelay = 0.9f;
+
+    private string _playerInput;
 
     public bool IsInputEnabled { get; private set; } = false;
+    public bool HasPlayerInput { get; private set; } = false;
 
     private void Start()
     {
-        _inputField.onValueChanged.AddListener(SendMessageToChat);
-        _closeButton.onClick.AddListener(OnCloseButtonPressed);
+        _inputField.onValueChanged.AddListener(UpdatePlayerInput);
     }
 
     private void OnEnable()
@@ -33,52 +40,52 @@ public class ChatBoxController : MonoBehaviour
         _inputField.onValueChanged.RemoveAllListeners();
     }
 
+    public void SubscribeOnCloseButton(UnityAction action)
+    {
+        _closeButton.onClick.AddListener(action);
+    }
+
     public void SetNames(string playerName, string objectName)
     {
         _playerNameLabel.text = playerName;
         _npcNameLabel.text = objectName;
     }
 
-    public void ShowAnswer(string answer)
+    public void SendMessageToChat(string answer)
     {
-        _lastNPCReplicLabel.text = answer;
+        _lastPlayerReplicLabel.text = _playerInput;
+        DisableInput();
+
+        StartCoroutine(ShowNPCAnswer(answer));
     }
 
-    /// <summary>
-    /// Must be called when the chat box is shown
-    /// </summary>
-    /// <param name="npcName"></param>
-    /// <param name="playerName"></param>
-    public void Setup(string npcName, string playerName)
+    private IEnumerator ShowNPCAnswer(string answer)
     {
-        if (!string.IsNullOrEmpty(npcName))
-        {
-            _npcNameLabel.text = npcName;
-        }
-
-        if (!string.IsNullOrEmpty(playerName))
-        {
-            _playerNameLabel.text = playerName;
-        }
+        yield return new WaitForSeconds(Random.Range(_minAnswerDelay, _maxAnswerDelay));
+        _lastNPCReplicLabel.text = answer;
     }
 
     private void EnableInput()
     {
         IsInputEnabled = true;
+        _playerInput = "";
+        _inputField.text = "";
+        _inputField.ActivateInputField();
         ShowUIElement(_inputField.gameObject);
         HideUIElement(_lastPlayerReplicLabel.gameObject);
-    }
-
-    private void OnCloseButtonPressed()
-    {
-        gameObject.SetActive(false);
     }
 
     private void DisableInput()
     {
         IsInputEnabled = false;
+        _inputField.DeactivateInputField();
         HideUIElement(_inputField.gameObject);
         ShowUIElement(_lastPlayerReplicLabel.gameObject);
+    }
+
+    private void OnCloseButtonPressed()
+    {
+        gameObject.SetActive(false);
     }
 
     private void ShowUIElement(GameObject uiElement)
@@ -91,8 +98,9 @@ public class ChatBoxController : MonoBehaviour
         uiElement.SetActive(false);
     }
 
-    private void SendMessageToChat(string messageText)
+    private void UpdatePlayerInput(string input)
     {
-        _lastPlayerReplicLabel.text = messageText;
-        DisableInput();
-    }}
+        _playerInput = input;
+        HasPlayerInput = !string.IsNullOrEmpty(input);
+    }
+}

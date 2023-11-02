@@ -1212,6 +1212,7 @@ namespace GercStudio.USK.Scripts
 
         public void SelectWeaponInInventory(int slot)
         {
+            return;
             if (slots[slot].weaponSlotInGame.Count <= 0 && !slots[slot].weaponSlotInGame[slots[slot].currentWeaponInSlot].fistAttack)
                 return;
 

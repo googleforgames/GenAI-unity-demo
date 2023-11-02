@@ -88,9 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde681a6bcc7cdf4b93231cd20d4a248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _npcName: {fileID: 1977187933587282752}
+  _npcNameLabel: {fileID: 1977187933587282752}
   _lastNPCReplicLabel: {fileID: 2172492103590392892}
-  _playerName: {fileID: 1984821396412064270}
+  _playerNameLabel: {fileID: 1984821396412064270}
   _lastPlayerReplicLabel: {fileID: 6676598277589470155}
   _inputField: {fileID: 387228322045021330}
   _closeButton: {fileID: 3791480531232790045}
