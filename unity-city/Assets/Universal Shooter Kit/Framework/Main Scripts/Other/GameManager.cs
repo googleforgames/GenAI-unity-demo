@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -132,34 +134,47 @@ namespace GercStudio.USK.Scripts
                         rotation = Quaternion.Euler(0, character.spawnZone.transform.eulerAngles.y, 0);
                     }
 
-                    var name = character.characterPrefab.name;
-                    var instantiateChar = Instantiate(character.characterPrefab, position, rotation);
+                    string name = character.characterPrefab.name;
+                    GameObject instantiateChar = GameObject.FindGameObjectsWithTag("Player").First(x =>
+                    {
+                        var networkObject =  x.GetComponent<NetworkObject>();
+                        return networkObject.IsOwner;
+                    });
+                    instantiateChar.transform.position = position;
+                    instantiateChar.transform.rotation = rotation;
 
                     instantiateChar.name = name;
+                    
+                    foreach (Transform child in instantiateChar.transform)
+                    {
+                        if (child.name == "Soldier_head")
+                        {
+                            instantiateChar.layer = LayerMask.NameToLayer("Head");
+                        }
+                    }
 
                     var controller = instantiateChar.GetComponent<Controller>();
                     controller.enabled = true;
-                    controller.inventoryManager.enabled = true;
-                    
+                    controller.isRemoteCharacter = false;
                     controllers.Add(controller);
+
+                    controller.CanMove = true;
+                    controller.inventoryManager.enabled = true;
+
                     inventoryManager.Add(instantiateChar.GetComponent<InventoryManager>());
                     cameraController.Add(instantiateChar.GetComponent<Controller>().CameraController);
-                    
+
                     StartCoroutine(rotationTimeout());
 
-                    var controllerScript = instantiateChar.GetComponent<Controller>();
-                    var inventoryManagerScript = instantiateChar.GetComponent<InventoryManager>();
-                   
-                    controllerScript.enabled = true;
-                    inventoryManagerScript.enabled = true;
+                    controller.ActiveCharacter = true;
 
-                    controllerScript.ActiveCharacter = i == 0;
-                    
-                    if((Application.isMobilePlatform || projectSettings.mobileDebug) && currentUIManager.UIButtonsMainObject)
+                    if ((Application.isMobilePlatform || projectSettings.mobileDebug) &&
+                        currentUIManager.UIButtonsMainObject)
                         currentUIManager.UIButtonsMainObject.SetActive(true);
-                    
-                    if (controllerScript.thisCamera.GetComponent<AudioListener>())
-                        controllerScript.thisCamera.GetComponent<AudioListener>().enabled = i == 0;
+
+                    controller.thisCamera.SetActive(true);
+                    if (controller.thisCamera.GetComponent<AudioListener>())
+                        controller.thisCamera.GetComponent<AudioListener>().enabled = i == 0;
                 }
             }
             else

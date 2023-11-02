@@ -116,7 +116,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4345077255666780
 Transform:
   m_ObjectHideFlags: 0
@@ -1979,13 +1979,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4187508212126394}
+  - component: {fileID: -1858240110169953528}
+  - component: {fileID: 2916315566607946287}
   - component: {fileID: 95849536648284558}
   - component: {fileID: 114566038061332768}
   - component: {fileID: 114274325461612278}
   - component: {fileID: -6295480661481601027}
   m_Layer: 0
   m_Name: Swat (White Clothes)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2010,6 +2012,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1858240110169953528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471175217401652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 951099334
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &2916315566607946287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471175217401652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77dacd64d52e4fb09ca5d6e4f030fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!95 &95849536648284558
 Animator:
   serializedVersion: 5
@@ -2175,9 +2227,9 @@ MonoBehaviour:
   TDSpeedInspectorTab: 0
   TPSpeedInspectorTab: 1
   moveInspectorTab: 1
-  inspectorTabTop: 4
-  inspectorTabDown: 1
-  currentInspectorTab: 4
+  inspectorTabTop: 1
+  inspectorTabDown: 3
+  currentInspectorTab: 1
   otherSettingsInspectorTab: 1
   inspectorSettingsTab: 1
   cameraInspectorTab: 1
@@ -2275,6 +2327,7 @@ MonoBehaviour:
   hitMarkers: []
   KillerName: 
   multiplayerNickname: 
+  CanMove: 0
   isSprint: 0
   isJump: 0
   isCrouch: 0
@@ -3616,7 +3669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4624646161288148}
   - component: {fileID: 137432515716728874}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Soldier_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}

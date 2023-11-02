@@ -32,10 +32,16 @@ steps:
 - id: 'dockerBuild'
   name: 'gcr.io/cloud-builders/docker'
   dir: /workspace
-  args: [ 'build', '-t', 'us-docker.pkg.dev/prj-zora-hub/zora-hub-containers/udp-game-server:v0.0.41', '.' ]
+  args: [ 'build', '-t', 'us-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_VERSION}', '.' ]
 
 images:
-- 'us-docker.pkg.dev/prj-zora-hub/zora-hub-containers/udp-game-server:v0.0.41'
+- 'us-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_VERSION}'
+ 
+substitutions:
+  _ARTIFACT_REPO_NAME: 'unity-agones-example'
+  _IMAGE_NAME: 'unity-city'
+  _IMAGE_VERSION: 'latest'
+ 
 options:
   # This allows for missing ENV variables.
   substitution_option: 'ALLOW_LOOSE'
