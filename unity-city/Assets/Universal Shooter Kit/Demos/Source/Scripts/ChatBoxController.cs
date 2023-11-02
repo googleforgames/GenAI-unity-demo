@@ -85,11 +85,6 @@ public class ChatBoxController : MonoBehaviour
         ShowUIElement(_lastPlayerReplicLabel.gameObject);
     }
 
-    private void OnCloseButtonPressed()
-    {
-        gameObject.SetActive(false);
-    }
-
     private void ShowUIElement(GameObject uiElement)
     {
         uiElement.SetActive(true);

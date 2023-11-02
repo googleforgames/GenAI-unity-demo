@@ -15,10 +15,11 @@ public class InteractableObject : MonoBehaviour
     private Action _release;
     private Action<bool> _playerEntered;
 
-    private GameManagerExtension _gameManager;
+    [HideInInspector] public GameManagerExtension GameManager;
     private const string playerTag = "Player";
 
-    public bool IsInteractable { get; private set; } = false;
+    private bool _canInteract = false;
+    private bool _isApplied = false;
 
     private void Start()
     {
@@ -35,12 +36,13 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        if (IsInteractable && !_gameManager.IsChatBoxShown() && Input.GetKeyDown(KeyCode.E))
+        var isInteractable = _canInteract && !_isApplied && !GameManager.IsChatBoxShown();
+        if (isInteractable && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
 
-        if (IsInteractable && !_gameManager.IsChatBoxShown() && Input.GetKeyUp(KeyCode.E))
+        if (isInteractable && Input.GetKeyUp(KeyCode.E))
         {
             Release();
         }
@@ -52,6 +54,8 @@ public class InteractableObject : MonoBehaviour
         {
             return;
         }
+
+        Debug.Log($"Player entered interaction area of {ObjectName}");
 
         PlayerName = other.name;
         SetInteractable(true);
@@ -65,13 +69,15 @@ public class InteractableObject : MonoBehaviour
             return;
         }
 
+        Debug.Log($"Player exited interaction area of {ObjectName}");
+
         SetInteractable(false);
         _playerEntered?.Invoke(false);
     }
 
-    public void SetInteractable(bool isInteractable)
+    private void SetInteractable(bool isInteractable)
     {
-        IsInteractable = isInteractable;
+        _canInteract = isInteractable;
     }
 
     public void SubscribeOnShowHint(Action<bool> callback)
@@ -91,7 +97,7 @@ public class InteractableObject : MonoBehaviour
 
     public void SubscribeOnShowChatBox(Action<Dialogue, string, string> callback, GameManagerExtension gameManagerExtension)
     {
-        _gameManager ??= gameManagerExtension;
+        GameManager ??= gameManagerExtension;
         ShowChatBox = callback;
     }
 
