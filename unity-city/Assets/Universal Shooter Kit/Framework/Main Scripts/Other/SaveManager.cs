@@ -301,7 +301,7 @@ namespace GercStudio.USK.Scripts
                 characterController.transform.position = sceneSaveData.characterPosition;
             }
             
-            if (saveInventory)
+            /*if (saveInventory)
             {
                 characterController.inventoryManager.HealthKits = new List<CharacterHelper.Kit>();
 
@@ -309,7 +309,7 @@ namespace GercStudio.USK.Scripts
                 {
                     characterController.inventoryManager.HealthKits.Add(new CharacterHelper.Kit{AddedValue = healthKit.addedValue, PickUpId = healthKit.itemId, Image = Resources.Load(healthKit.imageName, typeof(Texture)) as Texture});
                 }
-            }
+            }*/
 
             if(!saveCharacterHealth || characterSaveData.health == -1) return;
 

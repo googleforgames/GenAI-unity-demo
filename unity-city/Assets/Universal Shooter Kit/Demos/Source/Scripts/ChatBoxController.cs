@@ -47,13 +47,12 @@ public class ChatBoxController : MonoBehaviour
 
     public void SetNames(string playerName, string objectName)
     {
-        _playerNameLabel.text = playerName;
+        _playerNameLabel.text = "Diego";
         _npcNameLabel.text = objectName;
     }
 
     public void SendMessageToChat(string answer)
     {
-        Debug.Log("NPC Answered a question: " + answer);
         _lastPlayerReplicLabel.text = _playerInput;
         DisableInput();
 
@@ -84,11 +83,6 @@ public class ChatBoxController : MonoBehaviour
         _inputField.DeactivateInputField();
         HideUIElement(_inputField.gameObject);
         ShowUIElement(_lastPlayerReplicLabel.gameObject);
-    }
-
-    private void OnCloseButtonPressed()
-    {
-        gameObject.SetActive(false);
     }
 
     private void ShowUIElement(GameObject uiElement)

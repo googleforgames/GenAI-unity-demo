@@ -59,12 +59,12 @@ public class VarManager : MonoBehaviour
        
 
         generateImage("BillboardSpriteCube", "scifi image of black 3d cube with bright teal borders", 200);
-        generateImage("WallDisplay1Sprite", "fantasy art,alien pointing at a hamburger", 2000);
+        generateImage("WallDisplay1Sprite", "fantasy art, alien pointing at a hamburger", 2000);
         generateImage("WallDisplay2Sprite", "scifi image of an alien sitting on top of a jeep within a city", 4000);
         generateImage("BillboardSpriteBurger", "scifi image of a hamburger and an open now sign in the background", 12000);
-        generateImage("BillboardSpriteGate", "scifi image of a small candle flame behind a closed fence", 12000);
-        generateImage("BillboardSpriteBus", "scifi image of an alien riding a school bus", 12000);
-        generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off", 22000);
+        generateImage("BillboardSpriteGate", "scifi image of a small car exhaust flame behind a closed fence", 12000);
+        generateImage("BillboardSpriteBus", "scifi image of a school bus with an alien riding it", 12000);
+        generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off within a city", 22000);
     }
 
     // Update is called once per frame
@@ -82,7 +82,7 @@ public class VarManager : MonoBehaviour
 
         // Get imageURL from VarManager class
         string imageUrl = VarManager.varEndpointURI_ImageGen;
-        imageUrl = "http://" + imageUrl + "/generate_img?prompt=";
+        imageUrl = "http://" + imageUrl + "/vertex_image_gen?prompt=";
 
         //string brandedAdContent = AdRequest.adContentGlobal;
         string brandedAdContent = "";
