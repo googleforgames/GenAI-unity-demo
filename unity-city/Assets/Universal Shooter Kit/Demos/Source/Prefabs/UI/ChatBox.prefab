@@ -94,6 +94,8 @@ MonoBehaviour:
   _lastPlayerReplicLabel: {fileID: 6676598277589470155}
   _inputField: {fileID: 387228322045021330}
   _closeButton: {fileID: 3791480531232790045}
+  _minAnswerDelay: 0.2
+  _maxAnswerDelay: 0.5
 --- !u!1 &130422775086895189
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Player1:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1011,7 +1013,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Bottis:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

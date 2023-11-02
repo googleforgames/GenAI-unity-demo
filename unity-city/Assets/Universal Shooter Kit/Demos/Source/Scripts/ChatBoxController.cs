@@ -53,6 +53,7 @@ public class ChatBoxController : MonoBehaviour
 
     public void SendMessageToChat(string answer)
     {
+        Debug.Log("NPC Answered a question: " + answer);
         _lastPlayerReplicLabel.text = _playerInput;
         DisableInput();
 
@@ -61,8 +62,10 @@ public class ChatBoxController : MonoBehaviour
 
     private IEnumerator ShowNPCAnswer(string answer)
     {
-        yield return new WaitForSeconds(Random.Range(_minAnswerDelay, _maxAnswerDelay));
+        yield return new WaitForSecondsRealtime(Random.Range(_minAnswerDelay, _maxAnswerDelay));
+        Debug.Log("Added Answer to chatbox");
         _lastNPCReplicLabel.text = answer;
+        EnableInput();
     }
 
     private void EnableInput()
