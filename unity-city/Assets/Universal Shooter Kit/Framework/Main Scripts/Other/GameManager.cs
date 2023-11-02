@@ -97,23 +97,23 @@ namespace GercStudio.USK.Scripts
 
             // StartCoroutine("SpawnEnemies");
 
-            // if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit)
-            //     currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit.onClick.AddListener(ExitGame);
-            //
-            // if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart)
-            //     currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart.onClick.AddListener(RestartScene);
-            //
-            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume)
-            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate { Pause(true); });
-            //
-            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit)
-            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit.onClick.AddListener(ExitGame);
-            //
-            // if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options)
-            //     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options.onClick.AddListener(OptionsMenu);
-            //
-            // if (currentUIManager.gameOptions.back)
-            //     currentUIManager.gameOptions.back.onClick.AddListener(OptionsMenu);
+            if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit)
+                currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit.onClick.AddListener(ExitGame);
+            
+            if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart)
+                currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart.onClick.AddListener(RestartScene);
+            
+            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume)
+                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate { Pause(true); });
+            
+            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit)
+                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit.onClick.AddListener(ExitGame);
+            
+            if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options)
+                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options.onClick.AddListener(OptionsMenu);
+            
+            if (currentUIManager.gameOptions.back)
+                currentUIManager.gameOptions.back.onClick.AddListener(OptionsMenu);
         }
 
         private void Start()

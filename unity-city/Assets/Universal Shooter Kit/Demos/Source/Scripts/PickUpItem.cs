@@ -2,42 +2,28 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour, IInteractable
 {
-    private bool canInteract = false;
+    public string Name => _interactableObject.ObjectName;
+
+    private InteractableObject _interactableObject;
+    private GameManagerExtension _gameManager;
+
     private int playersInteracting = 0;
 
-    public void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (other.tag == "Player")
+        _interactableObject = GetComponent<InteractableObject>();
+        if (!_interactableObject)
         {
-            Debug.Log("Player can interact with object");
-            canInteract = true;
-            playersInteracting++;
+            return;
         }
-    }
 
-    public void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            Debug.Log("Player away from interact distance with object");
-            playersInteracting--;
-            if (playersInteracting == 0)
-            {
-                canInteract = false;
-            }
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && canInteract)
-        {
-            gameObject.SetActive(false);
-        }
+        _interactableObject.SubscribeOnInteract(OnInteract);
+        _gameManager = _interactableObject.GameManager;
     }
 
     public void OnInteract(string playerName, string objectName)
     {
-        
+        _gameManager.PutItemToInventory(this);
+        gameObject.SetActive(false);
     }
 }

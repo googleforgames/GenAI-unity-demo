@@ -3,16 +3,16 @@ using System.Linq;
 using GercStudio.USK.Scripts;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManagerExtension : MonoBehaviour
 {
     [SerializeField] private List<InteractableObject> _interactableObjects = new List<InteractableObject>();
 
     // TODO: move to the UIManager
-    [FormerlySerializedAs("_chatBoxController")] [SerializeField] private ChatBoxController _chatBox;
+    [SerializeField] private ChatBoxController _chatBox;
     [SerializeField] private TextMeshProUGUI _interactionCallout;
 
+    private Dictionary<string, PickUpItem> _inventory = new Dictionary<string, PickUpItem>();
     private GameManager _gameManager;
     private Dialogue _dummyDialogue;
     private bool _isHintShown = false;
@@ -41,18 +41,6 @@ public class GameManagerExtension : MonoBehaviour
         {
             _chatBox.SendMessageToChat(_dummyDialogue.GetAnswer(""));
         }
-        // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
-        // Pressing enter ends the line and sends the text and waits for the reply.
-        // When the text is sent, it is shown at the bottom with the following format:
-        // PlayerName: TEXT.
-        // The reply from the alien is shown at the top of the chat box with the following format:
-        // AlienName: RESPONSE.
-            
-        // Text box showing the text written by the player.
-        // Previous player message shown above the text box.
-        // Top of the Conversation widget:
-        // Last NPC message (As shown in the following mockup)
-
     }
 
     public bool IsChatBoxShown()
@@ -67,6 +55,22 @@ public class GameManagerExtension : MonoBehaviour
         {
             _chatBox.gameObject.SetActive(false);
         }
+    }
+
+    public void PutItemToInventory(PickUpItem item)
+    {
+        Debug.Log($"{item.Name} is added to the inventory");
+        _inventory.Add(item.Name, item);
+
+        // TODO: implement UI stuff
+    }
+
+    public void UseItemFromInventory(PickUpItem item)
+    {
+        Debug.Log($"{item.Name} from the inventory is used");
+        _inventory.Remove(item.Name);
+
+        // TODO: add the logic of usage
     }
 
     private void ShowInteractionCallout(bool showHint)
