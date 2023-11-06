@@ -311,7 +311,7 @@ namespace GercStudio.USK.Scripts
                 }
             }*/
 
-            if(!saveCharacterHealth || characterSaveData.health == -1) return;
+            if(!saveCharacterHealth || characterSaveData.health == -1 || !characterController) return;
 
             if (characterSaveData.health <= 0) characterSaveData.health = 1;
             characterController.health = characterSaveData.health;

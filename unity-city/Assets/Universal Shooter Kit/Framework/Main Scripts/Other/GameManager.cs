@@ -135,7 +135,13 @@ namespace GercStudio.USK.Scripts
                     }
 
                     string name = character.characterPrefab.name;
-                    GameObject instantiateChar = GameObject.FindGameObjectsWithTag("Player").First(x =>
+                    var playerGOs = GameObject.FindGameObjectsWithTag("Player");
+                    if (!playerGOs.Any())
+                    {
+                        return;
+                    }
+
+                    GameObject instantiateChar = playerGOs.First(x =>
                     {
                         var networkObject =  x.GetComponent<NetworkObject>();
                         return networkObject.IsOwner;

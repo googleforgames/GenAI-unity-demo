@@ -1,16 +1,11 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Conversation : MonoBehaviour, IInteractable
 {
-    public List<string> _npcAnswerList;
-
     private InteractableObject _interactableObject;
-    private Dialogue _dummyDialogue;
 
     private void Start()
     {
-        _dummyDialogue = new Dialogue(_npcAnswerList);
         _interactableObject = GetComponent<InteractableObject>();
         if (_interactableObject)
         {
@@ -18,8 +13,10 @@ public class Conversation : MonoBehaviour, IInteractable
         }
     }
 
+    // TODO: make an action registration and unregistration in the 
+    // InteractionHandler class (openChatBox, pickUpObject, playAnimation, etc.)
     public void OnInteract(string playerName, string objectName)
     {
-        _interactableObject.ShowChatBox?.Invoke(_dummyDialogue, playerName, objectName);
+        _interactableObject.ShowChatBox?.Invoke(playerName, objectName);
     }
 }
