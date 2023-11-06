@@ -1246,7 +1246,7 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 #endif
 						characterUI.crosshairMainObject.gameObject.SetActive(crosshairSetActiveState && crosshairAdditionalState && multiplayerAdditionalState);
 
-						if (Controller.anim.GetBool("Attack"))
+						if (Controller && Controller.anim && Controller.anim.GetBool("Attack"))
 						{
 							crosshairMultiplier = 1.5f;
 						}

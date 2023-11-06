@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class InteractableObject : MonoBehaviour
 {
-    public Action<Dialogue, string, string> ShowChatBox;
+    public Action<string, string> ShowChatBox;
 
     public string PlayerName { get; private set; }
     public string ObjectName { get; private set; }
@@ -36,13 +36,17 @@ public class InteractableObject : MonoBehaviour
 
     private void Update()
     {
-        var isInteractable = _canInteract && !_isApplied && !GameManager.IsChatBoxShown();
-        if (isInteractable && Input.GetKeyDown(KeyCode.E))
+        if (!_canInteract || _isApplied || GameManager.IsChatBoxShown())
+        {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Interact();
         }
 
-        if (isInteractable && Input.GetKeyUp(KeyCode.E))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             Release();
         }
@@ -95,7 +99,7 @@ public class InteractableObject : MonoBehaviour
         _release = callback;
     }
 
-    public void SubscribeOnShowChatBox(Action<Dialogue, string, string> callback, GameManagerExtension gameManagerExtension)
+    public void SubscribeOnShowChatBox(Action<string, string> callback, GameManagerExtension gameManagerExtension)
     {
         GameManager ??= gameManagerExtension;
         ShowChatBox = callback;
