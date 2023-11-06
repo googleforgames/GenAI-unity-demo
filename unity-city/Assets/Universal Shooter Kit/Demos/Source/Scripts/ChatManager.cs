@@ -6,8 +6,6 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
-using UnityEngine.UI;
-using System.Net;
 
 public class ChatManager : MonoBehaviour
 {
