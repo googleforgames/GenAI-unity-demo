@@ -2,6 +2,10 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
 using GercStudio.USK.Scripts;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
 
 public class ChatManager : MonoBehaviour
 {
@@ -13,7 +17,7 @@ public class ChatManager : MonoBehaviour
 
     private GameManager _gameManager;
     private ChatBoxController _chatBoxController;
-    private string endpointUrl = "http://34.105.107.165/npc";
+    private string endpointUrl = "http://35.185.245.49/npc";
 
     private void Start()
     {
@@ -68,7 +72,35 @@ public class ChatManager : MonoBehaviour
         }
 
         _chatBoxController.SendMessageToChat(question);
-        StartCoroutine(GetAnswer(question));
+        //StartCoroutine(GetAnswer(question));
+        SendJsonAsync(question);
+    }
+
+    private async void SendJsonAsync(string text)
+    {
+        // Create a dictionary to hold the key-value pair
+        Dictionary<string, string> jsonPayload = new()
+        {
+            ["prompt"] = text
+        };
+
+        // Convert the dictionary to JSON format
+        string jsonPayloadStr = JsonConvert.SerializeObject(jsonPayload);
+        byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonPayloadStr);
+
+        // Create a new HTTP request
+        var request = new HttpRequestMessage(HttpMethod.Post, endpointUrl)
+        {
+            // Set the request content type to JSON
+            Content = new StringContent(jsonPayloadStr, Encoding.UTF8, "application/json")
+        };
+
+        // Send the request
+        using var client = new HttpClient();
+        HttpResponseMessage response = await client.SendAsync(request);
+        Debug.Log("Response status code: " + response.StatusCode);
+        Debug.Log("Response content: " + await response.Content.ReadAsStringAsync());
+        _chatBoxController.ShowNPCAnswer(await response.Content.ReadAsStringAsync());
     }
 
     private IEnumerator GetAnswer(string question)
@@ -76,13 +108,19 @@ public class ChatManager : MonoBehaviour
         string jsonPayload = JsonUtility.ToJson(new { prompt = question });
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonPayload);
 
-        using (UnityWebRequest webRequest = new UnityWebRequest(endpointUrl, "POST"))
+        using (UnityWebRequest webRequest = new (endpointUrl, "POST"))
         {
-            webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
-            webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            webRequest.uploadHandler = new UploadHandlerRaw(jsonToSend);
+            webRequest.downloadHandler = new DownloadHandlerBuffer();
             webRequest.SetRequestHeader("Content-Type", "application/json");
 
+            float time1 = Time.realtimeSinceStartup;
             yield return webRequest.SendWebRequest();
+            float time2 = Time.realtimeSinceStartup;
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            Debug.Log("Request seconds: " + (time2 - time1) + "\nisError: " + webRequest.isNetworkError + " error: " + webRequest.error + "\nresponseCode: " + webRequest.responseCode + "\nresponseContent: " + webRequest.downloadHandler.text);
+#pragma warning restore CS0618 // Type or member is obsolete
 
             // catch error - this is fine for now, but more code needed here to handle errors.
             if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
@@ -95,6 +133,8 @@ public class ChatManager : MonoBehaviour
             }
             else
             {
+
+                Debug.Log($"Text from download handler: " + webRequest.downloadHandler.text);
                 var jsonResponse = JsonUtility.FromJson<ResponseData>(webRequest.downloadHandler.text);
                 _chatBoxController.ShowNPCAnswer(jsonResponse.response);
                 // chatOutput.text += "\n" + jsonResponse.response;
