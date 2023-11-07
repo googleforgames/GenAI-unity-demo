@@ -58,7 +58,7 @@ public class TriggerBehavior: MonoBehaviour, IInteractable
         }
     }
 
-    public void OnInteract(string playerName, string objectName)
+    public void OnInteract()
     {
         GetComponentInParent<Transform>().eulerAngles = new Vector3(GetComponentInParent<Transform>().rotation.x, GetComponentInParent<Transform>().rotation.y, GetComponentInParent<Transform>().rotation.z + 90);
         targetDoor.transform.position = new Vector3(doorOrigin.x, doorOrigin.y, doorOrigin.z + 3);

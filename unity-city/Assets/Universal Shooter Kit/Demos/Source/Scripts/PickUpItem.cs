@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour, IInteractable
 {
-    public string Name => _interactableObject.ObjectName;
+    public string Name => gameObject.name;
 
     private InteractableObject _interactableObject;
-    private GameManagerExtension _gameManager;
 
     private int playersInteracting = 0;
 
@@ -18,12 +17,10 @@ public class PickUpItem : MonoBehaviour, IInteractable
         }
 
         _interactableObject.SubscribeOnInteract(OnInteract);
-        _gameManager = _interactableObject.GameManager;
     }
 
-    public void OnInteract(string playerName, string objectName)
+    public void OnInteract()
     {
-        _gameManager.PutItemToInventory(this);
-        gameObject.SetActive(false);
+        InteractionHandler.Instance.PutItemToInventory(this);
     }
 }

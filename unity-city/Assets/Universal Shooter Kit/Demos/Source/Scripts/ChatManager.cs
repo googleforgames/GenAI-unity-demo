@@ -17,7 +17,7 @@ public class ChatManager : MonoBehaviour
 
     private GameManager _gameManager;
     private ChatBoxController _chatBoxController;
-    private string endpointUrl = "http://35.185.245.49/npc";
+    private string endpointUrl = "http://34.83.85.41/npc";
 
     private void Start()
     {
