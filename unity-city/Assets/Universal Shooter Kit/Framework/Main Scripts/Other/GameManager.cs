@@ -48,7 +48,7 @@ namespace GercStudio.USK.Scripts
         public GameObject secondCharacter;
         public GameObject secondCharGO;
 
-        private GameManagerExtension _gameGamagerExtension;
+        private InteractionHandler _interactionHandler => InteractionHandler.Instance;
 
         void Awake()
         {
@@ -203,10 +203,8 @@ namespace GercStudio.USK.Scripts
                     minimapParameters.mapExample.gameObject.SetActive(false);
                 }
             }
-            
-            CurrentCharacter = 0;
 
-            _gameGamagerExtension = GetComponent<GameManagerExtension>();
+            CurrentCharacter = 0;
         }
 
         public void SwitchCharacter()
@@ -405,9 +403,9 @@ namespace GercStudio.USK.Scripts
                         if (inventoryManager[CurrentCharacter].Controller.UIManager.CharacterUI.Inventory.MainObject.activeSelf)
                             return;
 
-                    if (_gameGamagerExtension.IsChatBoxShown())
+                    if (_interactionHandler.IsChatBoxShown())
                     {
-                        _gameGamagerExtension.HideChatBox();
+                        _interactionHandler.HideChatBox();
                     }
                     else
                     {

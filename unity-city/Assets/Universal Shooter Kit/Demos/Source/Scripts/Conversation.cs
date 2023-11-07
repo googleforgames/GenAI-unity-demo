@@ -13,10 +13,8 @@ public class Conversation : MonoBehaviour, IInteractable
         }
     }
 
-    // TODO: make an action registration and unregistration in the 
-    // InteractionHandler class (openChatBox, pickUpObject, playAnimation, etc.)
-    public void OnInteract(string playerName, string objectName)
+    public void OnInteract()
     {
-        _interactableObject.ShowChatBox?.Invoke(playerName, objectName);
+        InteractionHandler.Instance.ShowChatBox();
     }
 }

@@ -19,7 +19,7 @@ public class AnimationPlayer : MonoBehaviour, IInteractable
         _interactableObject.SubscribeOnRelease(OnRelease);
     }
 
-    public void OnInteract(string playerName, string objectName)
+    public void OnInteract()
     {
         if (_animator)
         {

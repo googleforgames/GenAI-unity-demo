@@ -1,12 +1,9 @@
 using Demo;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PuzzleSolvingDemo : MonoBehaviour, IInteractable
 {
-
     [SerializeField] private GameObject greenBox, blueBox, redBox;
     private int puzzleStep = 0;
     private int playersInteracting;
@@ -83,7 +80,7 @@ public class PuzzleSolvingDemo : MonoBehaviour, IInteractable
         }
     }
 
-    public void OnInteract(string playerName, string objectName)
+    public void OnInteract()
     {
         throw new System.NotImplementedException();
     }

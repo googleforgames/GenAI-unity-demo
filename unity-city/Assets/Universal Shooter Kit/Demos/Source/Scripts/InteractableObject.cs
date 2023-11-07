@@ -2,28 +2,21 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class InteractableObject : MonoBehaviour
+public class InteractableObject : MonoBehaviour, IInteractable
 {
-    public Action<string, string> ShowChatBox;
-
-    public string PlayerName { get; private set; }
-    public string ObjectName { get; private set; }
+    public string InteractionCalloutText = "Press E";
 
     [SerializeField] private float _reactionRadius = 5.0f;
 
-    private Action<string, string> _interact;
+    private Action _interact;
     private Action _release;
-    private Action<bool> _playerEntered;
 
-    [HideInInspector] public GameManagerExtension GameManager;
     private const string playerTag = "Player";
 
-    private bool _canInteract = false;
-    private bool _isApplied = false;
+    public bool CanInteract { get; private set; } = false;
 
     private void Start()
     {
-        ObjectName = gameObject.name;
         SetReactionArea();
     }
 
@@ -34,24 +27,6 @@ public class InteractableObject : MonoBehaviour
         reactionArea.isTrigger = true;
     }
 
-    private void Update()
-    {
-        if (!_canInteract || _isApplied || GameManager.IsChatBoxShown())
-        {
-            return;
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Interact();
-        }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            Release();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (!other.gameObject.CompareTag(playerTag))
@@ -59,11 +34,8 @@ public class InteractableObject : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Player entered interaction area of {ObjectName}");
-
-        PlayerName = other.name;
-        SetInteractable(true);
-        _playerEntered?.Invoke(true);
+        CanInteract = true;
+        InteractionHandler.Instance.OnPlayerEntered(other, this);
     }
 
     private void OnTriggerExit(Collider other)
@@ -73,23 +45,11 @@ public class InteractableObject : MonoBehaviour
             return;
         }
 
-        Debug.Log($"Player exited interaction area of {ObjectName}");
-
-        SetInteractable(false);
-        _playerEntered?.Invoke(false);
+        CanInteract = false;
+        InteractionHandler.Instance.OnPlayerExited();
     }
 
-    private void SetInteractable(bool isInteractable)
-    {
-        _canInteract = isInteractable;
-    }
-
-    public void SubscribeOnShowHint(Action<bool> callback)
-    {
-        _playerEntered = callback;
-    }
-
-    public void SubscribeOnInteract(Action<string, string> callback)
+    public void SubscribeOnInteract(Action callback)
     {
         _interact = callback;
     }
@@ -99,18 +59,12 @@ public class InteractableObject : MonoBehaviour
         _release = callback;
     }
 
-    public void SubscribeOnShowChatBox(Action<string, string> callback, GameManagerExtension gameManagerExtension)
+    public void OnInteract()
     {
-        GameManager ??= gameManagerExtension;
-        ShowChatBox = callback;
+        _interact?.Invoke();
     }
 
-    public void Interact()
-    {
-        _interact?.Invoke(PlayerName, ObjectName);
-    }
-
-    private void Release()
+    public void OnRelease()
     {
         _release?.Invoke();
     }
