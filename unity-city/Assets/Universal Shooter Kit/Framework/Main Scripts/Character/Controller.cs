@@ -168,6 +168,8 @@ namespace GercStudio.USK.Scripts
 		public Color32 opponentColor = Color.red;
 		public Color32 teammateColor = Color.green;
 
+		private bool _isOfflinePlay;
+
 		public enum Direction
 		{
 			Forward,
@@ -364,6 +366,8 @@ namespace GercStudio.USK.Scripts
 				UIManager.CharacterUI.HealthBar.fillAmount = 1;
 				UIManager.CharacterUI.HealthBar.color = Color.green;
 			}
+
+			_isOfflinePlay = PlayerPrefs.GetInt("EnableOfflinePlay") != 0;
 		}
 
 		private void OnDestroy()
@@ -1058,7 +1062,7 @@ namespace GercStudio.USK.Scripts
 //				if(directionVector.magnitude > 0)
 					CheckCollisionVector = directionVector * 100;
 
-				if (CanMove && IsOwner)
+				if (CanMove && (!_isOfflinePlay && IsOwner || _isOfflinePlay))
 				{
 					if (hasMoveButtonPressed)
 					{

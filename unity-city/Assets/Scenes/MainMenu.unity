@@ -310,8 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b4eadb123bf4e6b84974e9452c913d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverIpField: {fileID: 1616836696}
-  serverPortField: {fileID: 1253821443}
+  _serverIpField: {fileID: 1616836696}
+  _serverPortField: {fileID: 1253821443}
 --- !u!114 &81237198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,8 +1319,8 @@ Camera:
   m_GameObject: {fileID: 1659007537}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.0985226, g: 0.12624599, b: 0.16981131, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

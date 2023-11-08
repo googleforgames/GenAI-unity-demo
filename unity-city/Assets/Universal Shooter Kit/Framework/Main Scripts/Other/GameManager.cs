@@ -13,7 +13,7 @@ namespace GercStudio.USK.Scripts
 
         // public UIManager UIManager;
         public UIManager currentUIManager;
-        
+
         public int inspectorTab;
         public int CurrentCharacter;
         public int LastCharacter;
@@ -21,11 +21,11 @@ namespace GercStudio.USK.Scripts
         public List<Controller> controllers;
         public List<InventoryManager> inventoryManager;
         public List<CameraController> cameraController;
-        
+
         public bool gameStarted;
 
         public bool isPause;
-        
+
         private bool isOptions;
         private bool cameraFlyingStep1;
         private bool cameraFlyingStep2;
@@ -53,15 +53,17 @@ namespace GercStudio.USK.Scripts
         void Awake()
         {
             if (!enabled) return;
-            
+
             // if (UIManager)
             // {
-            
-            currentUIManager = !FindObjectOfType<UIManager>() ? Instantiate(Resources.Load("UI Manager", typeof(UIManager)) as UIManager) : FindObjectOfType<UIManager>();
+
+            currentUIManager = !FindObjectOfType<UIManager>()
+                ? Instantiate(Resources.Load("UI Manager", typeof(UIManager)) as UIManager)
+                : FindObjectOfType<UIManager>();
             currentUIManager.useMinimap = minimapParameters.useMinimap;
-            
+
             projectSettings = Resources.Load("Input", typeof(ProjectSettings)) as ProjectSettings;
-            
+
             // }
             // else
             // {
@@ -76,13 +78,13 @@ namespace GercStudio.USK.Scripts
             currentUIManager.CharacterUI.ActivateAll(minimapParameters.useMinimap);
 
             gameStarted = true;
-            
+
             cameraForSwitching = Helper.NewCamera("Camera for switching", transform, "GameManager");
             Destroy(cameraForSwitching.GetComponent<AudioListener>());
 
-            if(defaultCamera)
+            if (defaultCamera)
                 defaultCamera.gameObject.SetActive(false);
-            
+
             cameraForSwitching.gameObject.SetActive(false);
 
 // #if UNITY_EDITOR
@@ -99,19 +101,22 @@ namespace GercStudio.USK.Scripts
 
             if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit)
                 currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Exit.onClick.AddListener(ExitGame);
-            
+
             if (currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart)
                 currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.Restart.onClick.AddListener(RestartScene);
-            
+
             if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume)
-                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate { Pause(true); });
-            
+                currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Resume.onClick.AddListener(delegate
+                {
+                    Pause(true);
+                });
+
             if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit)
                 currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Exit.onClick.AddListener(ExitGame);
-            
+
             if (currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options)
                 currentUIManager.SinglePlayerGame.SinglePlayerGamePause.Options.onClick.AddListener(OptionsMenu);
-            
+
             if (currentUIManager.gameOptions.back)
                 currentUIManager.gameOptions.back.onClick.AddListener(OptionsMenu);
         }
@@ -135,22 +140,33 @@ namespace GercStudio.USK.Scripts
                     }
 
                     string name = character.characterPrefab.name;
-                    var playerGOs = GameObject.FindGameObjectsWithTag("Player");
-                    if (!playerGOs.Any())
+
+                    GameObject instantiateChar;
+
+                    if (PlayerPrefs.GetInt("EnableOfflinePlay") != 0)
                     {
-                        return;
+                        instantiateChar = Instantiate(character.characterPrefab, position, rotation);
+                    }
+                    else
+                    {
+                        List<GameObject> playerGOs = GameObject.FindGameObjectsWithTag("Player").ToList();
+                        if (!playerGOs.Any())
+                        {
+                            return;
+                        }
+
+                        instantiateChar = playerGOs.First(x =>
+                        {
+                            var networkObject = x.GetComponent<NetworkObject>();
+                            return networkObject.IsOwner;
+                        });
                     }
 
-                    GameObject instantiateChar = playerGOs.First(x =>
-                    {
-                        var networkObject =  x.GetComponent<NetworkObject>();
-                        return networkObject.IsOwner;
-                    });
                     instantiateChar.transform.position = position;
                     instantiateChar.transform.rotation = rotation;
 
                     instantiateChar.name = name;
-                    
+
                     foreach (Transform child in instantiateChar.transform)
                     {
                         if (child.name == "Soldier_head")
@@ -209,7 +225,6 @@ namespace GercStudio.USK.Scripts
 
         public void SwitchCharacter()
         {
-            
             // secondCharGO = Instantiate(secondCharacter,  controllers[CurrentCharacter].transform.position, controllers[CurrentCharacter].transform.rotation);
             //
             // controllers[CurrentCharacter].gameObject.SetActive(false);
@@ -252,7 +267,6 @@ namespace GercStudio.USK.Scripts
             //     CurrentCharacter = newCharacterIndex;
             //     StartCoroutine(FlyCamera());
             // }
-
         }
 
         // IEnumerator FlyCamera()
@@ -369,9 +383,10 @@ namespace GercStudio.USK.Scripts
 
         void Update()
         {
-            if(!gameStarted || Characters.Count == 0 || controllers.Count <= 0 || !controllers[CurrentCharacter] || inventoryManager.Count <= 0 || !inventoryManager[CurrentCharacter])
+            if (!gameStarted || Characters.Count == 0 || controllers.Count <= 0 || !controllers[CurrentCharacter] ||
+                inventoryManager.Count <= 0 || !inventoryManager[CurrentCharacter])
                 return;
-            
+
             // if (controllers[CurrentCharacter].projectSettings.ButtonsActivityStatuses[18] && (InputHelper.WasKeyboardOrMouseButtonPressed(projectSettings.keyboardButtonsInUnityInputSystem[18])
             //     || InputHelper.WasGamepadButtonPressed(projectSettings.gamepadButtonsInUnityInputSystem[16], controllers[CurrentCharacter])))
             //     
@@ -396,11 +411,14 @@ namespace GercStudio.USK.Scripts
             }
             else
             {
-                if (controllers[CurrentCharacter].projectSettings.ButtonsActivityStatuses[10] && (InputHelper.WasKeyboardOrMouseButtonPressed(projectSettings.keyboardButtonsInUnityInputSystem[10])
-                                                                                                                               || InputHelper.WasGamepadButtonPressed(projectSettings.gamepadButtonsInUnityInputSystem[10], controllers[CurrentCharacter])))
+                if (controllers[CurrentCharacter].projectSettings.ButtonsActivityStatuses[10] &&
+                    (InputHelper.WasKeyboardOrMouseButtonPressed(projectSettings.keyboardButtonsInUnityInputSystem[10])
+                     || InputHelper.WasGamepadButtonPressed(projectSettings.gamepadButtonsInUnityInputSystem[10],
+                         controllers[CurrentCharacter])))
                 {
                     if (inventoryManager[CurrentCharacter].Controller.UIManager.CharacterUI.Inventory.MainObject)
-                        if (inventoryManager[CurrentCharacter].Controller.UIManager.CharacterUI.Inventory.MainObject.activeSelf)
+                        if (inventoryManager[CurrentCharacter].Controller.UIManager.CharacterUI.Inventory.MainObject
+                            .activeSelf)
                             return;
 
                     if (_interactionHandler.IsChatBoxShown())
@@ -418,9 +436,9 @@ namespace GercStudio.USK.Scripts
         public void OptionsMenu()
         {
             isOptions = !isOptions;
-            
-           // UIHelper.ResetSettingsButtons(currentUIManager.gameOptions.graphicsButtons,  PlayerPrefs.GetInt("CurrentQuality"));
-            
+
+            // UIHelper.ResetSettingsButtons(currentUIManager.gameOptions.graphicsButtons,  PlayerPrefs.GetInt("CurrentQuality"));
+
             SwitchMenu(isOptions ? "options" : "pause");
         }
 
@@ -439,17 +457,17 @@ namespace GercStudio.USK.Scripts
         void SwitchMenu(string type)
         {
             currentUIManager.HideAllSinglePlayerMenus();
-            
+
             switch (type)
             {
                 case "pause":
                     currentUIManager.SinglePlayerGame.SinglePlayerGamePause.ActivateAll();
                     break;
-                
+
                 case "options":
                     currentUIManager.gameOptions.ActivateAll();
                     break;
-                
+
                 case "gameOver":
                     currentUIManager.SinglePlayerGame.SinglePlayerGameGameOver.ActivateAll();
                     break;
@@ -473,7 +491,6 @@ namespace GercStudio.USK.Scripts
                 AudioListener.pause = true;
                 controllers[CurrentCharacter].isPause = true;
                 // UIHelper.ManageUIButtons(controllers[CurrentCharacter], controllers[CurrentCharacter].inventoryManager, currentUIManager, controllers[CurrentCharacter].CharacterSync);
-
             }
             else
             {
@@ -484,7 +501,7 @@ namespace GercStudio.USK.Scripts
             if (isPause && showUI)
                 SwitchMenu("pause");
             else SwitchMenu("null");
-            
+
 
             Time.timeScale = isPause ? 0 : 1;
         }
@@ -493,8 +510,9 @@ namespace GercStudio.USK.Scripts
         {
             yield return new WaitForSeconds(0.1f);
             controllers[CurrentCharacter].isPause = false;
-            
-            UIHelper.ManageUIButtons(controllers[CurrentCharacter], controllers[CurrentCharacter].inventoryManager, currentUIManager, controllers[CurrentCharacter].CharacterSync);
+
+            UIHelper.ManageUIButtons(controllers[CurrentCharacter], controllers[CurrentCharacter].inventoryManager,
+                currentUIManager, controllers[CurrentCharacter].CharacterSync);
 
             StopCoroutine(ControllerPauseDelay());
         }
@@ -516,7 +534,7 @@ namespace GercStudio.USK.Scripts
         IEnumerator rotationTimeout()
         {
             yield return new WaitForSeconds(0.1f);
-                
+
             controllers[0].transform.rotation = Quaternion.Euler(0, Characters[0].spawnZone.transform.eulerAngles.y, 0);
             cameraController[0]._mouseAbsolute = new Vector2(Characters[0].spawnZone.transform.eulerAngles.y, 0);
         }
@@ -527,6 +545,5 @@ namespace GercStudio.USK.Scripts
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             StopCoroutine("FastRestart");
         }
-
     }
 }
