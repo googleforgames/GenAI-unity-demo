@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using GercStudio.USK.Scripts;
 using TMPro;
 using UnityEngine;
 
@@ -7,10 +7,11 @@ public class InteractionHandler : MonoBehaviour
     public static InteractionHandler Instance { get ; private set; }
 
     [SerializeField] private TextMeshProUGUI _interactionCallout;
+    [SerializeField] private InventoryDemo _inventory;
 
+    private GameManager _gameManager;
     private ChatManager _chatManager;
 
-    private Dictionary<string, PickUpItem> _inventory = new Dictionary<string, PickUpItem>();
     private InteractableObject _currentInteractionObject;
 
     private string _interactorName;
@@ -25,42 +26,32 @@ public class InteractionHandler : MonoBehaviour
 
     private void Start()
     {
+        _gameManager = GetComponent<GameManager>();
         _chatManager = GetComponent<ChatManager>();
+        _inventory.SetupSlots();
     }
 
     private void Update()
     {
-        if (!_currentInteractionObject || !_currentInteractionObject.CanInteract || IsChatBoxShown())
+        if (_currentInteractionObject && _currentInteractionObject.CanInteract && !IsChatBoxShown())
         {
-            return;
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                _currentInteractionObject.OnInteract();
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                _currentInteractionObject.OnRelease();
+            }
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!IsChatBoxShown())
         {
-            _currentInteractionObject.OnInteract();
-        }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            _currentInteractionObject.OnRelease();
-        }
-    }
-
-    public void RegisterInteractableObject(InteractableObject interactableObject)
-    {
-        
-    }
-
-    private void SubscribeToInteraction(IInteractable interactable)
-    {
-        switch (interactable)
-        {
-            case AnimationPlayer:
-                break;
-            case Conversation:
-                break;
-            case PickUpItem:
-                break;
+            if (Input.GetKeyUp(KeyCode.I))
+            {
+                ToggleInventory();
+            }
         }
     }
 
@@ -84,6 +75,7 @@ public class InteractionHandler : MonoBehaviour
 
         ShowInteractionCallout(true);
     }
+
     public void OnPlayerExited()
     {
         Debug.Log($"{_interactorName} exited interaction area of {_interactionObjectName}");
@@ -92,20 +84,6 @@ public class InteractionHandler : MonoBehaviour
         _interactionObjectName = "";
         _currentInteractionObject = null;
         ShowInteractionCallout(false);
-    }
-
-    private void ShowInteractionCallout(bool show)
-    {
-        if (_isCalloutShown == show)
-        {
-            return;
-        }
-
-        _isCalloutShown = show;
-        if (_interactionCallout)
-        {
-            _interactionCallout.gameObject.SetActive(show);
-        }
     }
 
     public void ShowChatBox()
@@ -123,19 +101,37 @@ public class InteractionHandler : MonoBehaviour
         return _chatManager.IsChatOpen;
     }
 
+    public bool IsInventoryShown()
+    {
+        return _inventory.gameObject.activeInHierarchy;
+    }
+
     public void PutItemToInventory(PickUpItem item)
     {
         Debug.Log($"{item.Name} is added to the inventory");
-        _inventory.Add(item.Name, item);
 
+        _inventory.PutItem(item);
         item.gameObject.SetActive(false);
     }
 
-    public void UseItemFromInventory(PickUpItem item)
+    public void ToggleInventory()
     {
-        Debug.Log($"{item.Name} from the inventory is used");
-        _inventory.Remove(item.Name);
+        var inventory = _inventory.gameObject;
+        inventory.SetActive(!inventory.activeInHierarchy);
+        _gameManager.Pause(false);
+    }
 
-        // TODO: add the logic of usage
+    private void ShowInteractionCallout(bool show)
+    {
+        if (_isCalloutShown == show)
+        {
+            return;
+        }
+
+        _isCalloutShown = show;
+        if (_interactionCallout)
+        {
+            _interactionCallout.gameObject.SetActive(show);
+        }
     }
 }
