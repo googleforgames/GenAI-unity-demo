@@ -425,6 +425,10 @@ namespace GercStudio.USK.Scripts
                     {
                         _interactionHandler.HideChatBox();
                     }
+                    else if (_interactionHandler.IsInventoryShown())
+                    {
+                        _interactionHandler.ToggleInventory();
+                    }
                     else
                     {
                         Pause(true);

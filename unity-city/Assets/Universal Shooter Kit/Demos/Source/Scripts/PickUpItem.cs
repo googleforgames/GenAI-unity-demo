@@ -3,6 +3,7 @@ using UnityEngine;
 public class PickUpItem : MonoBehaviour, IInteractable
 {
     public string Name => gameObject.name;
+    public Sprite Icon;
 
     private InteractableObject _interactableObject;
 
