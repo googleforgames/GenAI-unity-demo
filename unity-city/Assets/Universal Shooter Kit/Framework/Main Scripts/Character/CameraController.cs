@@ -210,7 +210,11 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 			BodyLookAt.hideFlags = HideFlags.HideInHierarchy;
 			
 			LastGamepadAxis = new Vector2(Controller.transform.forward.x, Controller.transform.forward.z);
-			targetDirection = MainCamera.localEulerAngles;
+
+			if (MainCamera != null)
+			{
+				targetDirection = MainCamera.localEulerAngles;
+			}
 
 			if (Controller.CameraParameters.alwaysTPAimMode)
 			{

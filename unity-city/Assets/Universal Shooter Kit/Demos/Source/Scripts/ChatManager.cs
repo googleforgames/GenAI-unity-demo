@@ -9,7 +9,7 @@ using System.Text;
 
 public class ChatManager : MonoBehaviour
 {
-    [SerializeField] private string _playerName = "Diego";
+    [SerializeField] private string _playerName = "Ishan";
 
     public GameObject chatBox;
 
@@ -17,7 +17,7 @@ public class ChatManager : MonoBehaviour
 
     private GameManager _gameManager;
     private ChatBoxController _chatBoxController;
-    private string endpointUrl = "http://35.185.245.49/npc";
+    private string endpointUrl = "http://34.82.208.181/npc";
 
     private void Start()
     {
