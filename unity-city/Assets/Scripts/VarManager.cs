@@ -18,6 +18,9 @@ public class VarManager : MonoBehaviour
     public static string varEndpointURI_LLM;
 
     private Texture2D texture;
+    private float timeStamp = 0;
+    private float imageGenerationRefreshRate = 0.5f;
+    private int imageGenerationCycle = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -58,31 +61,76 @@ public class VarManager : MonoBehaviour
         spriteRenderer5.sortingOrder = -1;
        
 
-        generateImage("BillboardSpriteCube", "scifi image of black 3d cube with bright teal borders", 200);
-        generateImage("WallDisplay1Sprite", "fantasy art, alien pointing at a hamburger", 2000);
-        generateImage("WallDisplay2Sprite", "scifi image of an alien sitting on top of a jeep within a city", 4000);
-        generateImage("BillboardSpriteBurger", "scifi image of a hamburger and an open now sign in the background", 12000);
-        generateImage("BillboardSpriteGate", "scifi image of a small car exhaust flame behind a closed fence", 12000);
-        generateImage("BillboardSpriteBus", "scifi image of a school bus with an alien riding it", 12000);
-        generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off within a city", 22000);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Time.time - timeStamp > imageGenerationRefreshRate)
+        {
+            //Debug.Log("Generate new image");
+            
+           switch (imageGenerationCycle)
+            {
+                case 0:
+                    generateImage("BillboardSpriteCube", "scifi image of black cube with bright teal borders", 1);
+                    break;
+                case 1:
+                    generateImage("WallDisplay1Sprite", "fantasy art of a robot holding a hamburger pointing in one hand", 1);
+                    break;
 
+                case 2:
+                    generateImage("WallDisplay2Sprite", "scifi image of an alien sitting on top of a jeep within a city", 1);
+                    break;
+                case 3:
+                    generateImage("BillboardSpriteBurger", "scifi image of a dinner with a hamburger and an open now sign in the background, lightning jumping around the sign", 1);
+                    break;
+                case 4:
+                    generateImage("BillboardSpriteGate", "scifi image of a small flame coming out of turbine", 1);
+                    break;
+                case 5:
+                    generateImage("BillboardSpriteBus", "scifi image of a school bus and an alien playing with a plant", 1);
+                    break;
+                case 6:
+                    generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off within a city", 1);
+                    break;
+            }
+            
+            imageGenerationCycle++;
+            if (imageGenerationCycle > 7)
+            { 
+                imageGenerationCycle = 0;
+            }
+            /*
+            
+                generateImage("BillboardSpriteCube", "scifi image of black cube with bright teal borders", 5);
+                generateImage("WallDisplay1Sprite", "fantasy art of a robot holding a hamburger pointing in one hand", 10);
+                generateImage("WallDisplay2Sprite", "scifi image of an alien sitting on top of a jeep within a city", 15);
+                generateImage("BillboardSpriteBurger", "scifi image of a dinner with a hamburger and an open now sign in the background, lightning jumping around the sign", 20);
+                generateImage("BillboardSpriteGate", "scifi image of a small flame coming out of turbine", 25);
+                generateImage("BillboardSpriteBus", "scifi image of a school bus and an alien playing with a plant", 30);
+                generateImage("BillboardSpriteShip", "scifi image of a spaceship taking off within a city", 35);
+            */
+            timeStamp = Time.time;
+            //Debug.Log("Images Generated");
+        }
+
+        //Debug.Log("Time since last prompt: " + (Time.time - timeStamp));
     }
 
     async Task generateImage(string SpriteName, string imageContext, int timeDelay)
     {
-        await Task.Delay(timeDelay);
+        //await Task.Delay(timeDelay);
 
         //Create a new web request
         Debug.Log("Generating Initial Billboard Image");
 
         // Get imageURL from VarManager class
         string imageUrl = VarManager.varEndpointURI_ImageGen;
-        imageUrl = "http://" + imageUrl + "/vertex_image_gen?prompt=";
+        //imageUrl = "http://" + imageUrl + "/vertex_image_gen?prompt=";
+        //imageUrl = "http://" + imageUrl + "/get_image?prompt=";
+        imageUrl = "http://" + imageUrl + "/generate_img?prompt=";
 
         //string brandedAdContent = AdRequest.adContentGlobal;
         string brandedAdContent = "";
