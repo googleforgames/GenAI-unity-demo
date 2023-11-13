@@ -67,7 +67,7 @@ namespace GercStudio.USK.Scripts
                     catch (Exception e)
                     {
                         Debug.LogError(e);
-                        // throw;
+                        throw;
                     }
                 }
                 
