@@ -10,14 +10,38 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
     private Action _interact;
     private Action _release;
+    private Collider _trigger;
 
     private const string playerTag = "Player";
 
     public bool CanInteract { get; private set; } = false;
+    public bool IsPlayerLookingAt { get; private set; } = false;
 
     private void Start()
     {
         SetReactionArea();
+    }
+
+    private void Update()
+    {
+        if (!CanInteract)
+        {
+            return;
+        }
+
+        if (!_trigger)
+        {
+            return;
+        }
+
+        if (Physics.Raycast(_trigger.transform.position, _trigger.transform.TransformDirection(Vector3.forward), out var hit, _reactionRadius) && hit.collider.name == gameObject.name)
+        {
+            IsPlayerLookingAt = true;
+        }
+        else
+        {
+            IsPlayerLookingAt = false;
+        }
     }
 
     private void SetReactionArea()
@@ -36,6 +60,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
         CanInteract = true;
         InteractionHandler.Instance.OnPlayerEntered(other, this);
+        _trigger = other;
     }
 
     private void OnTriggerExit(Collider other)
@@ -47,6 +72,7 @@ public class InteractableObject : MonoBehaviour, IInteractable
 
         CanInteract = false;
         InteractionHandler.Instance.OnPlayerExited();
+        _trigger = null;
     }
 
     public void SubscribeOnInteract(Action callback)
