@@ -17,7 +17,8 @@ public class InteractionHandler : MonoBehaviour
     private string _interactorName;
     private string _interactionObjectName;
 
-    private bool _isCalloutShown = false;
+    private bool _isInterractCalloutShown = false;
+    private bool _isUseCalloutShown = false;
 
     private void Awake()
     {
@@ -33,7 +34,17 @@ public class InteractionHandler : MonoBehaviour
 
     private void Update()
     {
-        if (_currentInteractionObject && _currentInteractionObject.CanInteract && !IsChatBoxShown())
+        if (IsChatBoxShown())
+        {
+            return;
+        }
+
+        if (Input.GetKeyUp(KeyCode.I))
+        {
+            ToggleInventory();
+        }
+
+        if (_currentInteractionObject && _currentInteractionObject.CanInteract)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -44,24 +55,21 @@ public class InteractionHandler : MonoBehaviour
             {
                 _currentInteractionObject.OnRelease();
             }
-        }
 
-        if (!IsChatBoxShown())
-        {
-            if (Input.GetKeyUp(KeyCode.I))
+            if (!IsInventoryShown() && _currentInteractionObject.IsPlayerLookingAt && !_isUseCalloutShown)
             {
-                ToggleInventory();
+                // Show a Use hint?
             }
         }
     }
 
     public void OnPlayerEntered(Collider player, InteractableObject interactableObject)
     {
-        Debug.Log($"{_interactorName} entered interaction area of {_interactionObjectName}");
-
         _interactorName = player.name;
         _interactionObjectName = interactableObject.name;
         _currentInteractionObject = interactableObject;
+
+        Debug.Log($"{_interactorName} entered interaction area of {_interactionObjectName}");
 
         var calloutText = _currentInteractionObject.InteractionCalloutText;
         if (!string.IsNullOrEmpty(calloutText))
@@ -106,12 +114,12 @@ public class InteractionHandler : MonoBehaviour
         return _inventory.gameObject.activeInHierarchy;
     }
 
-    public void PutItemToInventory(PickUpItem item)
+    public void PutItemToInventory(PickUpItemBase itemBase)
     {
-        Debug.Log($"{item.Name} is added to the inventory");
+        Debug.Log($"{itemBase.Name} is added to the inventory");
 
-        _inventory.PutItem(item);
-        item.gameObject.SetActive(false);
+        _inventory.PutItem(itemBase);
+        itemBase.gameObject.SetActive(false);
     }
 
     public void ToggleInventory()
@@ -123,12 +131,12 @@ public class InteractionHandler : MonoBehaviour
 
     private void ShowInteractionCallout(bool show)
     {
-        if (_isCalloutShown == show)
+        if (_isInterractCalloutShown == show)
         {
             return;
         }
 
-        _isCalloutShown = show;
+        _isInterractCalloutShown = show;
         if (_interactionCallout)
         {
             _interactionCallout.gameObject.SetActive(show);
