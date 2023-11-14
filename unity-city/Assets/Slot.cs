@@ -7,7 +7,7 @@ public class Slot : MonoBehaviour
 
     private Button _button;
     private Image _icon;
-    private PickUpItem _storedItem;
+    private IUsable _storedItem;
 
     private void OnDestroy()
     {
@@ -22,17 +22,17 @@ public class Slot : MonoBehaviour
         _button.interactable = false;
     }
 
-    public void PutItem(PickUpItem item)
+    public void PutItem(IUsable item, Sprite icon)
     {
         _storedItem = item;
-        _icon.sprite = item.Icon;
+        _icon.sprite = icon;
         _button.interactable = true;
         IsOccupied = true;
     }
 
     private void UseItem()
     {
-        _storedItem.gameObject.SetActive(true);
+        _storedItem.Use();
         Clean();
     }
 

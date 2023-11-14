@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class PickUpItem : MonoBehaviour, IInteractable
+public class PickUpItemBase : MonoBehaviour, IInteractable, IUsable
 {
     public string Name => gameObject.name;
     public Sprite Icon;
 
-    private InteractableObject _interactableObject;
+    protected InteractableObject _interactableObject;
 
     private int playersInteracting = 0;
 
@@ -23,5 +23,10 @@ public class PickUpItem : MonoBehaviour, IInteractable
     public void OnInteract()
     {
         InteractionHandler.Instance.PutItemToInventory(this);
+    }
+
+    public void Use()
+    {
+        // Implement some logic here or define it in the descendant classes
     }
 }

@@ -6,12 +6,12 @@ public class InventoryDemo : MonoBehaviour
 {
     [SerializeField] private List<Slot> _slots = new List<Slot>();
 
-    public void PutItem(PickUpItem item)
+    public void PutItem(PickUpItemBase item)
     {
         var slot = _slots.FirstOrDefault(slot => !slot.IsOccupied);
         if (slot)
         {
-            slot.PutItem(item);
+            slot.PutItem(item, item.Icon);
         }
     }
 
@@ -21,10 +21,5 @@ public class InventoryDemo : MonoBehaviour
         {
             slot.Setup();
         }
-    }
-
-    public void ReorganizeSlots()
-    {
-        
     }
 }
