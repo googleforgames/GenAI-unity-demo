@@ -34,6 +34,7 @@ public class ClientGameManager : IDisposable
         if (isStarted)
         {
             // GoToGame();
+            Debug.Log("Client connection started.");
         }
         else
         {
