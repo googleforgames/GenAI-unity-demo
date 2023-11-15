@@ -1,81 +1,83 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using Button = UnityEngine.UI.Button;
 
 public class ChatBoxController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _npcName;
-    [SerializeField] private TextMeshProUGUI _lastNPCReplicText;
-    [SerializeField] private TextMeshProUGUI _playerName;
-    [SerializeField] private TextMeshProUGUI _lastPlayerReplicLabel;
+    [SerializeField] private TextMeshProUGUI _npcNameLabel;
+    [SerializeField] private TextMeshProUGUI _lastNPCReplicLabel;
+    [SerializeField] private TextMeshProUGUI _playerOutputLabel;
     [SerializeField] private TMP_InputField _inputField;
-    [SerializeField] private Button _closeButton;
+    [SerializeField] public Button _closeButton;
 
-    private string _lastNPCReplic = "";
-    private string _lastPlayerReplic = "";
-
-    private void Start()
-    {
-        _inputField.onValueChanged.AddListener(SendMessageToChat);
-        _closeButton.onClick.AddListener(() => gameObject.SetActive(false));
-    }
+    private string _playerName;
 
     private void OnEnable()
     {
+        _lastNPCReplicLabel.text = string.Empty;
+        _playerOutputLabel.text = string.Empty;
         EnableInput();
-    }
-
-    private void Update()
-    {
-        // TODO Input:
-        // + When opened, the chat box takes input from the keyboard to write the text of what the player is saying.
-        // Pressing enter ends the line and sends the text and waits for the reply.
-        // When the text is sent, it is shown at the bottom with the following format:
-        // PlayerName: TEXT.
-        // The reply from the alien is shown at the top of the chat box with the following format:
-        // AlienName: RESPONSE.
-            
-        // Text box showing the text written by the player.
-        // Previous player message shown above the text box.
-        // Top of the Conversation widget:
-        // Last NPC message (As shown in the following mockup)
-
     }
 
     private void OnDestroy()
     {
+        _inputField.onSubmit.RemoveAllListeners();
         _closeButton.onClick.RemoveAllListeners();
-        _inputField.onValueChanged.RemoveAllListeners();
     }
 
-    /// <summary>
-    /// Must be called when the chat box is shown
-    /// </summary>
-    /// <param name="npcName"></param>
-    /// <param name="playerName"></param>
-    public void Setup(string npcName, string playerName)
+    public void SubscribeOnMessageSent(UnityAction<string> action)
     {
-        if (!string.IsNullOrEmpty(npcName))
+        _inputField.onSubmit.AddListener(action);
+    }
+
+    public void SubscribeOnCloseButton(UnityAction action)
+    {
+        _closeButton.onClick.AddListener(action);
+    }
+
+    public void SetNames(string playerName, string objectName)
+    {
+        _playerName = playerName;
+        _playerOutputLabel.text = playerName;
+        _npcNameLabel.text = objectName;
+    }
+
+    public void SendMessageToChat(string message)
+    {
+        if (string.IsNullOrEmpty(message))
         {
-            _npcName.text = npcName;
+            return;
         }
 
-        if (!string.IsNullOrEmpty(playerName))
-        {
-            _playerName.text = playerName;
-        }
+        var playerMessage = _playerName + ": " + message;
+        PostPlayerMessage(playerMessage);
+        DisableInput();
+    }
+
+    public void ShowNPCAnswer(string answer)
+    {
+        Debug.Log("Added Answer to chatbox");
+        _lastNPCReplicLabel.text = answer;
+        EnableInput();
     }
 
     private void EnableInput()
     {
         ShowUIElement(_inputField.gameObject);
-        HideUIElement(_lastPlayerReplicLabel.gameObject);
+        _inputField.text = "";
+        _inputField.Select();
     }
 
     private void DisableInput()
     {
+        _inputField.DeactivateInputField();
         HideUIElement(_inputField.gameObject);
-        ShowUIElement(_lastPlayerReplicLabel.gameObject);
+    }
+
+    private void PostPlayerMessage(string message)
+    {
+        _playerOutputLabel.text = message;
     }
 
     private void ShowUIElement(GameObject uiElement)
@@ -87,9 +89,4 @@ public class ChatBoxController : MonoBehaviour
     {
         uiElement.SetActive(false);
     }
-
-    private void SendMessageToChat(string messageText)
-    {
-        _lastPlayerReplicLabel.text = messageText;
-        DisableInput();
-    }}
+}

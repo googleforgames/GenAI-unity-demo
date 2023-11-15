@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Netcode;
 #if USK_MULTIPLAYER
 using Photon.Pun;
 #endif
@@ -21,7 +22,7 @@ using Random = UnityEngine.Random;
 namespace GercStudio.USK.Scripts
 {
 	[RequireComponent(typeof(Animator))]
-	public class Controller : MonoBehaviour
+	public class Controller : NetworkBehaviour
 	{
 		public CharacterController CharacterController;
 		public InventoryManager inventoryManager;
@@ -167,6 +168,8 @@ namespace GercStudio.USK.Scripts
 		public Color32 opponentColor = Color.red;
 		public Color32 teammateColor = Color.green;
 
+		private bool _isOfflinePlay;
+
 		public enum Direction
 		{
 			Forward,
@@ -208,7 +211,7 @@ namespace GercStudio.USK.Scripts
 		private Transform bodylooks;
 
 		private bool isObstacle;
-		private bool CanMove;
+		public bool CanMove;
 		private bool wasRunningActiveBeforeJump;
 		public bool isSprint;
 		public bool isJump;
@@ -325,6 +328,8 @@ namespace GercStudio.USK.Scripts
 			inventoryManager.Controller = this;
 
 			eventSystem = FindObjectOfType<EventSystem>();
+
+			isRemoteCharacter = true;
 		}
 
 		void Start()
@@ -361,6 +366,8 @@ namespace GercStudio.USK.Scripts
 				UIManager.CharacterUI.HealthBar.fillAmount = 1;
 				UIManager.CharacterUI.HealthBar.color = Color.green;
 			}
+
+			_isOfflinePlay = PlayerPrefs.GetInt("EnableOfflinePlay") != 0;
 		}
 
 		private void OnDestroy()
@@ -487,7 +494,7 @@ namespace GercStudio.USK.Scripts
 						UIManager = gameManager.currentUIManager;
 						canKillOthers = MultiplayerHelper.CanKillOthers.Everyone;
 
-						isRemoteCharacter = false;
+						// isRemoteCharacter = false;
 					}
 				}
 #if USK_MULTIPLAYER
@@ -507,7 +514,7 @@ namespace GercStudio.USK.Scripts
 				else if (FindObjectOfType<Adjustment>())
 				{
 					UIManager = FindObjectOfType<Adjustment>().UIManager;
-					isRemoteCharacter = false;
+					// isRemoteCharacter = false;
 				}
 #endif
 				else
@@ -1055,7 +1062,7 @@ namespace GercStudio.USK.Scripts
 //				if(directionVector.magnitude > 0)
 					CheckCollisionVector = directionVector * 100;
 
-				if (CanMove)
+				if (CanMove && (!_isOfflinePlay && IsOwner || _isOfflinePlay))
 				{
 					if (hasMoveButtonPressed)
 					{

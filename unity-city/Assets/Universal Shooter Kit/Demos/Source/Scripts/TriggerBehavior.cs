@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.UIElements;
-
 
 /// <summary>
 /// TODO: Make generic behavior.
@@ -18,18 +12,6 @@ public class TriggerBehavior: MonoBehaviour, IInteractable
     private Vector3 leverReleasedState;
     private bool canInteract = false;
     private int playersInteracting = 0;
-
-
-    public void OnInteract()
-    {
-        GetComponentInParent<Transform>().eulerAngles = new Vector3(GetComponentInParent<Transform>().rotation.x, GetComponentInParent<Transform>().rotation.y, GetComponentInParent<Transform>().rotation.z + 90);
-        targetDoor.transform.position = new Vector3(doorOrigin.x, doorOrigin.y, doorOrigin.z + 3);
-    }
-
-    public void SetInteractable(bool isInteractable)
-    {
-        throw new NotImplementedException();
-    }
 
     public void OnTriggerEnter(Collider other)
     {
@@ -54,11 +36,6 @@ public class TriggerBehavior: MonoBehaviour, IInteractable
         }
     }
 
-    public void SubscribeOnInteract(Action callback)
-    {
-        throw new NotImplementedException();
-    }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -79,5 +56,11 @@ public class TriggerBehavior: MonoBehaviour, IInteractable
             GetComponentInParent<Transform>().eulerAngles = leverReleasedState;
             targetDoor.transform.position = doorOrigin;
         }
+    }
+
+    public void OnInteract()
+    {
+        GetComponentInParent<Transform>().eulerAngles = new Vector3(GetComponentInParent<Transform>().rotation.x, GetComponentInParent<Transform>().rotation.y, GetComponentInParent<Transform>().rotation.z + 90);
+        targetDoor.transform.position = new Vector3(doorOrigin.x, doorOrigin.y, doorOrigin.z + 3);
     }
 }

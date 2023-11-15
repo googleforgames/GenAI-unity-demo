@@ -4,20 +4,44 @@ using UnityEngine;
 [RequireComponent(typeof(SphereCollider))]
 public class InteractableObject : MonoBehaviour, IInteractable
 {
+    public string InteractionCalloutText = "Press E";
+
     [SerializeField] private float _reactionRadius = 5.0f;
 
-    public Action OnInteractAction;
+    private Action _interact;
+    private Action _release;
+    private Collider _trigger;
 
     private const string playerTag = "Player";
-    private Action _showChatBox;
-    private Action<Animator> _playAnimation;
-    private Action<bool> _onPlayerEntered;
-    
-    private bool _isInteractable = true;
+
+    public bool CanInteract { get; private set; } = false;
+    public bool IsPlayerLookingAt { get; private set; } = false;
 
     private void Start()
     {
         SetReactionArea();
+    }
+
+    private void Update()
+    {
+        if (!CanInteract)
+        {
+            return;
+        }
+
+        if (!_trigger)
+        {
+            return;
+        }
+
+        if (Physics.Raycast(_trigger.transform.position, _trigger.transform.TransformDirection(Vector3.forward), out var hit, _reactionRadius) && hit.collider.name == gameObject.name)
+        {
+            IsPlayerLookingAt = true;
+        }
+        else
+        {
+            IsPlayerLookingAt = false;
+        }
     }
 
     private void SetReactionArea()
@@ -27,49 +51,47 @@ public class InteractableObject : MonoBehaviour, IInteractable
         reactionArea.isTrigger = true;
     }
 
-    private void Update()
-    {
-        if (_isInteractable && Input.GetKeyDown(KeyCode.E))
-        {
-            OnInteract();
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(playerTag))
+        if (!other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(true);
+            return;
         }
+
+        CanInteract = true;
+        InteractionHandler.Instance.OnPlayerEntered(other, this);
+        _trigger = other;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag(playerTag))
+        if (!other.gameObject.CompareTag(playerTag))
         {
-            _onPlayerEntered?.Invoke(false);
+            return;
         }
-    }
 
-    public void SetInteractable(bool isInteractable)
-    {
-        _isInteractable = isInteractable;
-    }
-
-    public void SubscribeOnShowHint(Action<bool> callback)
-    {
-        _onPlayerEntered = callback;
+        CanInteract = false;
+        InteractionHandler.Instance.OnPlayerExited();
+        _trigger = null;
     }
 
     public void SubscribeOnInteract(Action callback)
     {
-        OnInteractAction = callback;
+        _interact = callback;
     }
 
-    // 
+    public void SubscribeOnRelease(Action callback)
+    {
+        _release = callback;
+    }
+
     public void OnInteract()
     {
-        Debug.Log($"An object {this} is activated");
-        OnInteractAction?.Invoke();
+        _interact?.Invoke();
+    }
+
+    public void OnRelease()
+    {
+        _release?.Invoke();
     }
 }

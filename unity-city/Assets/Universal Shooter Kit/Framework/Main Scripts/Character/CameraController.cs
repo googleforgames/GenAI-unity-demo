@@ -210,7 +210,11 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 			BodyLookAt.hideFlags = HideFlags.HideInHierarchy;
 			
 			LastGamepadAxis = new Vector2(Controller.transform.forward.x, Controller.transform.forward.z);
-			targetDirection = MainCamera.localEulerAngles;
+
+			if (MainCamera != null)
+			{
+				targetDirection = MainCamera.localEulerAngles;
+			}
 
 			if (Controller.CameraParameters.alwaysTPAimMode)
 			{
@@ -974,7 +978,8 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 					_mouseAbsolute.x = -17;
 //					_mouseAbsolute.y = 55;
 				}
-				
+
+				if (!body) return;
 				body.rotation = desiredRotation;
 
 				Controller.TopBodyOffset();
@@ -1245,7 +1250,7 @@ public Vector3 desiredCameraPosition = Vector3.zero;
 #endif
 						characterUI.crosshairMainObject.gameObject.SetActive(crosshairSetActiveState && crosshairAdditionalState && multiplayerAdditionalState);
 
-						if (Controller.anim.GetBool("Attack"))
+						if (Controller && Controller.anim && Controller.anim.GetBool("Attack"))
 						{
 							crosshairMultiplier = 1.5f;
 						}

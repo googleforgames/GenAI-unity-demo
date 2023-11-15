@@ -43,7 +43,9 @@ spec:
     spec:
       containers:
       - name: simple-game-server
-        image: us-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_VERSION}
+        # image: us-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_VERSION}
+        image: us-docker.pkg.dev/globant-kubecon/unity-agones-example/unity-netcode:latest
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "128Mi"

@@ -16,7 +16,7 @@
 apiVersion: "agones.dev/v1"
 kind: GameServer
 metadata:
-  generateName: "simple-unity-server-"
+  generateName: "unity-city-server-"
 spec:
   ports:
   - name: default
@@ -26,7 +26,7 @@ spec:
     # Disable health checking. defaults to false, but can be set to true
     disabled: false
     # Number of seconds after the container has started before health check is initiated. Defaults to 5 seconds
-    initialDelaySeconds: 5
+    initialDelaySeconds: 90
     # If the `Health()` function doesn't get called at least once every period (seconds), then
     # the game server is not healthy. Defaults to 5
     periodSeconds: 5
@@ -42,9 +42,12 @@ spec:
   template:
     spec:
       containers:
-      - name: simple-game-server
-        image: us-docker.pkg.dev/prj-zora-hub/zora-hub-containers/udp-game-server:v0.0.41
+      - name: unity-city-server
+        # image: us-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REPO_NAME}/${_IMAGE_NAME}:${_IMAGE_VERSION}
+        image: us-docker.pkg.dev/globant-kubecon/unity-agones-example/unity-city:latest
+        imagePullPolicy: Always
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "128m"
+            memory: "1024Mi"
+            cpu: "500m"
+#      restartPolicy: Never

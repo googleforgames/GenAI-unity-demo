@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -59,7 +60,15 @@ namespace GercStudio.USK.Scripts
             {
                 if (surface && surface.allPlayersInScene.Count > 0)
                 {
-                    player = surface.allPlayersInScene[0].player.transform;
+                    try
+                    {
+                        player = surface.allPlayersInScene[0].player.transform;
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
+                        throw;
+                    }
                 }
                 
                 return;

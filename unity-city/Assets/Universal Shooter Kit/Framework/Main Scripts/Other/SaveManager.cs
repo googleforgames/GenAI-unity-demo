@@ -125,15 +125,15 @@ namespace GercStudio.USK.Scripts
 
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                SaveData();
-            }
+            //if (Input.GetKeyDown(KeyCode.I))
+            //{
+            //    SaveData();
+            //}
             
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            }
+            //if (Input.GetKeyDown(KeyCode.U))
+            //{
+            //    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            //}
             
             if (Input.GetKeyDown(KeyCode.J))
             {
@@ -301,7 +301,7 @@ namespace GercStudio.USK.Scripts
                 characterController.transform.position = sceneSaveData.characterPosition;
             }
             
-            if (saveInventory)
+            /*if (saveInventory)
             {
                 characterController.inventoryManager.HealthKits = new List<CharacterHelper.Kit>();
 
@@ -309,9 +309,9 @@ namespace GercStudio.USK.Scripts
                 {
                     characterController.inventoryManager.HealthKits.Add(new CharacterHelper.Kit{AddedValue = healthKit.addedValue, PickUpId = healthKit.itemId, Image = Resources.Load(healthKit.imageName, typeof(Texture)) as Texture});
                 }
-            }
+            }*/
 
-            if(!saveCharacterHealth || characterSaveData.health == -1) return;
+            if(!saveCharacterHealth || characterSaveData.health == -1 || !characterController) return;
 
             if (characterSaveData.health <= 0) characterSaveData.health = 1;
             characterController.health = characterSaveData.health;

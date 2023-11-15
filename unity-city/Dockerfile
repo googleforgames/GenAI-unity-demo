@@ -1,7 +1,7 @@
 # Start from this base image, based on Ubuntu LTS.
 FROM unitymultiplay/linux-base-image:1.0.1
-ENV SERVER_BUILD_NAME=ServerBuild
-ENV SERVER_BUILD_PATH=Builds/${SERVER_BUILD_NAME}
+ENV SERVER_BUILD_NAME=Server
+ENV SERVER_BUILD_PATH=ServerBuilds
 
 # Install dependencies.
 USER root
@@ -16,5 +16,9 @@ COPY ${SERVER_BUILD_PATH}/${SERVER_BUILD_NAME}_Data/ ./${SERVER_BUILD_NAME}_Data
 COPY ${SERVER_BUILD_PATH}/${SERVER_BUILD_NAME}.x86_64 .
 COPY ${SERVER_BUILD_PATH}/UnityPlayer.so .
 
+USER root
+RUN chmod +x ./${SERVER_BUILD_NAME}.x86_64
+USER mpukgame
+
 # Set your game entrypoint.
-CMD sleep 2 && ./ServerBuild.x86_64
+CMD sleep 2 && ./${SERVER_BUILD_NAME}.x86_64 

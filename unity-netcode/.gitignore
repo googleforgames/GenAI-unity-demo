@@ -1,0 +1,10 @@
+Library
+obj
+Builds/Client
+Temp
+Logs
+
+*.sln
+*.csproj
+
+.idea

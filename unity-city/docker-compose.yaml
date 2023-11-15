@@ -14,4 +14,4 @@ services:
 
 configs:
   gs_config:
-    file: ./gameserver-local.yaml
+    file: ./gameserver.yaml

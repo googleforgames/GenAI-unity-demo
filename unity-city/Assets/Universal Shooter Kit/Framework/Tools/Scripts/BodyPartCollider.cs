@@ -94,7 +94,7 @@ namespace GercStudio.USK.Scripts
                 if (aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.Hearing && aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.All) return;
                
                 var rootGO = other.transform.root.gameObject;
-                
+                /*
                 if (aiController.aiArea.hasAnyPlayerInZone && rootGO.GetComponent<Controller>() && !other.CompareTag("Melee Collider") && !other.CompareTag("Fire")) // check players' noise
                 {
                     if(rootGO.GetComponent<Controller>().currentNavMeshArea != aiController.aiArea.navMeshArea)
@@ -124,6 +124,7 @@ namespace GercStudio.USK.Scripts
                         }
                     }
                 }
+                */
             }
         }
 
@@ -230,8 +231,8 @@ namespace GercStudio.USK.Scripts
             //         aiController.InSmoke = false;
             //     }
 
-                if (aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.Hearing && aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.All) return;
-
+                //if (aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.Hearing && aiController.opponentsDetectionType != AIHelper.OpponentsDetectionType.All) return;
+                /*
                 if (other.transform.root.gameObject.GetComponent<Controller>())
                 {
                     aiController.allPlayersHeardByEnemy.Clear();
@@ -244,6 +245,7 @@ namespace GercStudio.USK.Scripts
                         }
                     }
                 }
+                */
             }
         }
     }
