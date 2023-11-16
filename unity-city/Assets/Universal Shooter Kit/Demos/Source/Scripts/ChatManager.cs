@@ -17,7 +17,7 @@ public class ChatManager : MonoBehaviour
 
     private GameManager _gameManager;
     private ChatBoxController _chatBoxController;
-    private readonly string _defaultEndpointUrl = "http://34.83.85.41/npc";
+    private string _endpointUrl = "http://34.83.85.41/npc";
 
     private void Start()
     {
@@ -69,8 +69,8 @@ public class ChatManager : MonoBehaviour
             return;
         }
 
-        // endpointUrl = "http://" + uri + "/npc";
-        // Debug.Log($"The LLM URI is changed to {endpointUrl}");
+        _endpointUrl = "http://" + uri + "/npc";
+        Debug.Log($"The LLM URI is changed to {_endpointUrl}");
     }
 
     private void ShowChatBox(bool show)
@@ -86,7 +86,6 @@ public class ChatManager : MonoBehaviour
         }
 
         _chatBoxController.SendMessageToChat(question);
-        //StartCoroutine(GetAnswer(question));
         SendJsonAsync(question);
     }
 
@@ -103,7 +102,7 @@ public class ChatManager : MonoBehaviour
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonPayloadStr);
 
         // Create a new HTTP request
-        var request = new HttpRequestMessage(HttpMethod.Post, _defaultEndpointUrl)
+        var request = new HttpRequestMessage(HttpMethod.Post, _endpointUrl)
         {
             // Set the request content type to JSON
             Content = new StringContent(jsonPayloadStr, Encoding.UTF8, "application/json")
@@ -122,7 +121,7 @@ public class ChatManager : MonoBehaviour
         string jsonPayload = JsonUtility.ToJson(new { prompt = question });
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonPayload);
 
-        using (UnityWebRequest webRequest = new (_defaultEndpointUrl, "POST"))
+        using (UnityWebRequest webRequest = new (_endpointUrl, "POST"))
         {
             webRequest.uploadHandler = new UploadHandlerRaw(jsonToSend);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
