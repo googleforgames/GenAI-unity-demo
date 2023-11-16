@@ -17,7 +17,7 @@ public class ChatManager : MonoBehaviour
 
     private GameManager _gameManager;
     private ChatBoxController _chatBoxController;
-    private string endpointUrl = "http://34.83.85.41/npc";
+    private readonly string _defaultEndpointUrl = "http://34.83.85.41/npc";
 
     private void Start()
     {
@@ -30,6 +30,8 @@ public class ChatManager : MonoBehaviour
 
         _chatBoxController.SubscribeOnMessageSent(OnSendQuestion);
         _chatBoxController.SubscribeOnCloseButton(OnHideChatBox);
+
+        SetUri();
     }
 
     public void OnShowChatBox(string playerName = "", string npcName = "")
@@ -57,6 +59,18 @@ public class ChatManager : MonoBehaviour
 
         IsChatOpen = false;
         _gameManager.Pause(false);
+    }
+
+    private void SetUri()
+    {
+        var uri = VarManager.varEndpointURI_LLM;
+        if (string.IsNullOrEmpty(uri))
+        {
+            return;
+        }
+
+        // endpointUrl = "http://" + uri + "/npc";
+        // Debug.Log($"The LLM URI is changed to {endpointUrl}");
     }
 
     private void ShowChatBox(bool show)
@@ -89,7 +103,7 @@ public class ChatManager : MonoBehaviour
         byte[] jsonToSend = new UTF8Encoding().GetBytes(jsonPayloadStr);
 
         // Create a new HTTP request
-        var request = new HttpRequestMessage(HttpMethod.Post, endpointUrl)
+        var request = new HttpRequestMessage(HttpMethod.Post, _defaultEndpointUrl)
         {
             // Set the request content type to JSON
             Content = new StringContent(jsonPayloadStr, Encoding.UTF8, "application/json")
@@ -108,7 +122,7 @@ public class ChatManager : MonoBehaviour
         string jsonPayload = JsonUtility.ToJson(new { prompt = question });
         byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonPayload);
 
-        using (UnityWebRequest webRequest = new (endpointUrl, "POST"))
+        using (UnityWebRequest webRequest = new (_defaultEndpointUrl, "POST"))
         {
             webRequest.uploadHandler = new UploadHandlerRaw(jsonToSend);
             webRequest.downloadHandler = new DownloadHandlerBuffer();
