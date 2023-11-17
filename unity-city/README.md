@@ -25,7 +25,7 @@ Check out [these instructions](https://agones.dev/site/docs/installation/).
   ```
 
 * Click **Build**.
-* The Builds are created in a `ServerBuild` Folder and **Saved As** `Server`.
+* The Builds are created in a `ServerBuild` Folder and saved as `Server`.
 
 ### Running the Dedicated Game Server on Kubernetes
 
@@ -34,7 +34,7 @@ Check out [these instructions](https://agones.dev/site/docs/installation/).
 Build docker image and push to registry.
 
 ```
-docker build -t agones-example/unity-netcode:latest .
+docker build -t agones-agones-example/unity-city:latest .
 ```
 
 #### Option 2: Google Cloud Build
@@ -63,7 +63,7 @@ Run:
 $ kubectl create -f gameserver.yaml
 ```
 
-The output should be similar to:
+The `kubectl get gs` output should be similar to:
 
 ```
 kubectl get gs
@@ -71,4 +71,4 @@ NAME                        STATE   ADDRESS         PORT   NODE                 
 unity-city-server-b4hnz   Ready   34.69.***.***   7953   gke-gke-agones-gke-agones-primary-65d17602-ld6z   5d21h
 ```
 
-When running client use above `Address` and `Port` for clients.
+When running the client use above `Address` and `Port`.
