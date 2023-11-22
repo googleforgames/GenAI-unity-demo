@@ -1,5 +1,6 @@
-# Unity GenAI and Agones game demo
+# Unity GenAI game integration demo
 
+# Server setup
 ## Prerequisites
 This example is working on
 
@@ -72,3 +73,34 @@ unity-city-server-b4hnz   Ready   34.69.***.***   7953   gke-gke-agones-gke-agon
 ```
 
 When running the client use above `Address` and `Port`.
+
+# Client setup
+## Setting up the AI endpoints
+Look for the Game Manager object in the Hierarchy.
+
+Inside it, select GameVars.
+
+![image](https://github.com/googleforgames/multiplayer-demo-game/assets/82907841/59b7f39a-6567-49a7-8c4a-4e68b3beee5f)
+
+In the inspector, look for Var Manager (Script)
+
+For image generation, set the IP and Port in Endpoint URI_Image Gen.
+
+For text generation, set the IP and Port in Endpoint URI_LLM.
+
+![image](https://github.com/googleforgames/multiplayer-demo-game/assets/82907841/e493b288-2a21-481a-8b9e-ed0e7c647301)
+
+Go inside VarManager.cs, look for imageUrl in line 133 and make sure to set the correct endpoint URL for image generation.
+
+Go inside ChatManager.cs, look for _endpointUrl in line 72 and make sure to set the correct endpoint URL for text generation.
+
+## Playing
+To start a session the server must be already running.
+
+After starting the game, the connection widget will appear.
+
+Write the IP and Port of the server and press connect.
+
+This data will be saved so it doesn’t need to be added every time.
+
+![image](https://github.com/googleforgames/multiplayer-demo-game/assets/82907841/c8fb7b44-f43b-4326-b303-6dcd118b0c65)
